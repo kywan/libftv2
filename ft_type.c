@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/03/24 16:03:35 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:07:30 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <libft.h>
 #include <ft_printf.h>
 
-static int	ft_cast(t_module *m, va_list *args)
+static int	ft_cast(t_module *m, va_list args)
 {
 	const char	*_signed = "di";
 	const char	*_unsigned = "ouxX";
@@ -39,6 +39,8 @@ static int	ft_cast(t_module *m, va_list *args)
 	else if ((ft_strchr(_signed, m->type) || ft_strchr(_unsigned, m->type))
 			&& m->modif[0] == 'z')
 		return (ft_sizet(m, args));
+	else if (m->type == 's')
+		return (ft_string(m, args));
 	else
 	{
 		ft_display_error(badmodif, m);
@@ -50,7 +52,7 @@ static int	ft_other_type(t_module *module)
 {
 	int	i;
 
-	i = module->width;
+	i = module->width - 1;
 	if (module->flag.moins)
 		ft_putchar(module->type);
 	while (i > 0)
@@ -63,10 +65,10 @@ static int	ft_other_type(t_module *module)
 	}
 	if (!module->flag.moins)
 		ft_putchar(module->type);
-	return (module->width + 1);
+	return (module->width == 0 ? 1 : module->width);
 }
 
-int	ft_valid_type(t_module *module, va_list *args)
+int	ft_valid_type(t_module *module, va_list args)
 {
 	char *map = "sSpdDioOuUxXcC";
 

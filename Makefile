@@ -69,7 +69,8 @@ PRINTF=ft_printf.o \
 	   ft_int.o \
 	   ft_long.o \
 	   ft_longlong.o \
-	   ft_sizet.o
+	   ft_sizet.o \
+	   ft_string.o
 ################################################################################
 ##                                                                            ##
 ##                   COMPILATION RULES : DONT TOUCH: IT'S MAGIC               ##

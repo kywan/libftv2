@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/03/24 13:23:29 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:09:56 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,24 @@ int						ft_check_modif(char *str, t_module *module);
 
 int						ft_valid_flag(t_module *module);
 
-int						ft_valid_type(t_module *module, va_list *args);
+int						ft_valid_type(t_module *module, va_list args);
 
-int						ft_error(t_module *module, va_list *args);
+int						ft_error(t_module *module);
 
 int						ft_display_error(int error, t_module *module);
 
 t_module				*ft_createelem(t_module **module);
 
-int						ft_display(const char *, t_module *mod, va_list *args);
-int	ft_int(t_module *module, va_list *args);
-int	ft_long(t_module *module, va_list *args);
-int	ft_longlong(t_module *module, va_list *args);
-int	ft_sizet(t_module *module, va_list *args);
+int						ft_display(const char *, t_module *mod, va_list args);
+int	ft_int(t_module *module, va_list args);
+int	ft_long(t_module *module, va_list args);
+int	ft_longlong(t_module *module, va_list args);
+int	ft_sizet(t_module *module, va_list args);
 
-int	ft_uint(t_module *module, va_list *args);
-int	ft_ulong(t_module *module, va_list *args);
-int	ft_ulonglong(t_module *module, va_list *args);
+int	ft_uint(t_module *module, va_list args);
+int	ft_ulong(t_module *module, va_list args);
+int	ft_ulonglong(t_module *module, va_list args);
 
-
+int	ft_string(t_module *module, va_list args);
 
 #endif

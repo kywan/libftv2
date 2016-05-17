@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/03/22 13:06:05 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/17 11:39:00 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ int	ft_display_error(int error, t_module *module)
 	return (-1);
 }
 
-int		ft_error(t_module *module, va_list *args)
+int		ft_error(t_module *module)
 {
 	if (ft_valid_flag(module) != no_error)
-		return (-1);
-	if (ft_valid_type(module, args) != no_error)
 		return (-1);
 	return(no_error);
 }

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 15:49:45 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/03/24 15:25:51 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/17 13:11:06 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,21 @@ int	ft_display(const char *str, t_module *module, va_list *args)
 	i = 0;
 	rab = 0;
 	j = 0;
-	while (str[i])
+	while (str[i +j])
 	{
-		if (str[i] == '%')
+		if (str[i + j] == '%')
 		{
 			rab += ft_valid_type(module, args);
-			while (module->type && str[i] != module->type)
-			{
-				i++;
-			}
+			while (module->type && str[i + j] != module->type)
+				j++;
+			j++;
+			module = module->next;
 		}
 		else
-			ft_putchar(str[i]);
-		if (str[i])
+		{
+			ft_putchar(str[i + j]);
 			i++;
+		}
 	}
 	return (i + rab);
 }
