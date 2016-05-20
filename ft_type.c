@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 14:07:30 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:26:05 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	ft_other_type(t_module *module)
 		ft_putchar(module->type);
 	while (i > 0)
 	{
-		if (module->flag.zero)
+		if (module->flag.zero && !module->flag.moins)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');

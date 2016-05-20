@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 13:14:26 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:24:03 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h> //a  suprimer juste pour debug
@@ -16,7 +16,7 @@
 #include <ft_error.h>
 #include <stdlib.h>
 
-static void		ft_debug(t_module *module)
+/*static void		ft_debug(t_module *module)
 {
 	printf("__________________________\n\tFLAGS\n");
 	printf("'-' = %d|'+' = %d|' ' = %d|'#' = %d|'0' = %d\n",module->flag.moins,module->flag.plus,module->flag.space,module->flag.diese,module->flag.zero);
@@ -28,9 +28,9 @@ static void		ft_debug(t_module *module)
 		printf("value = %d\n", (int)module->arg);
 	else
 		printf("value = %lld\n", (long long)module->arg);
-}
+}*/
 
-static int		ft_gestion(const char *str, va_list *args)
+static int		ft_gestion(const char *str, va_list args)
 {
 	char	*s;
 	t_module	*start_module;
@@ -53,7 +53,7 @@ static int		ft_gestion(const char *str, va_list *args)
 			{
 				//il y q une error
 			}
-				ft_debug(work_module); //a suprimer
+//				ft_debug(work_module); //a suprimer
 		}
 		else
 			return (ft_display(str, start_module, args)/*pas plus de '%'*/);
@@ -70,7 +70,7 @@ int				ft_printf(const char *format, ...)
 
 	total = 0;
 	va_start(args, format);
-	total = ft_gestion(format, &args);
+	total = ft_gestion(format, args);
 	va_end(args);
 	return (total);
 }

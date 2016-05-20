@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 15:49:45 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 13:11:06 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:04:45 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <libft.h>
 #include <stdarg.h>
 
-int	ft_display(const char *str, t_module *module, va_list *args)
+int	ft_display(const char *str, t_module *module, va_list args)
 {
 	int	i;
 	int	j;
