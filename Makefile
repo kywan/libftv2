@@ -30,7 +30,7 @@ OBJ=ft_putchar.o ft_putchar_fd.o \
 	ft_strrev.o \
 	ft_strcmp.o ft_strncmp.o \
 	ft_strcat.o ft_strncat.o ft_strlcat.o \
-	ft_strlen.o \
+	ft_strlen.o ft_nbrlen.o \
 	ft_strchr.o ft_strrchr.o \
 	ft_strstr.o ft_strnstr.o \
 	ft_strsplit.o \

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:50:07 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/24 10:15:55 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/24 11:28:17 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,13 @@ int					ft_toupper(int c);
 
 size_t				ft_strlen(const char *c);
 
+int					ft_nbrlen(int i);
+
 int					ft_atoi(char *c);
 
 char				*ft_itoa(int n);
 
-int					ft_itos(int x, char str[], int d);
-
-void				ft_ftoa(float n, char *res, int prec);
+char				*ft_ftoa(float n, int prec);
 
 double				ft_pow(double x, int y);
 

@@ -6,42 +6,37 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 17:09:59 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/20 17:18:57 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/24 11:35:41 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdlib.h>
 
-int		ft_itos(int x, char str[], int d)
+char	*ft_ftoa(float n, int prec)
 {
-	int	i;
-
-	i = 0;
-	while (x)
-	{
-		str[i++] = (x % 10) + '0';
-		x = x / 10;
-	}
-	while (i < d)
-		str[i++] = '0';
-	ft_strrev(str);
-	str[i] = '\0';
-	return (i);
-}
-
-void	ft_ftoa(float n, char *res, int prec)
-{
-	int	intpart;
-	int	floatpart;
-	int	i;
+	char	*a;
+	char	*cintpart;
+	int		intpart;
+	float	descpart;
+	int		i;
 
 	intpart = (int)n;
-	floatpart = n - (float)intpart;
-	i = ft_itos(intpart, res, 0);
+	descpart = n - (float)intpart;
+	cintpart = ft_itoa(intpart);
+	a = (char *)malloc(sizeof(char) * prec);
+	if (!a)
+		return (cintpart);
 	if (prec != 0)
+		a[0] = '.';
+	i = 1;
+	while (prec > 0)
 	{
-		res[i] = '.';
-		floatpart = floatpart * ft_pow(10, prec);
-		ft_itos((int)floatpart, res + i + 1, prec);
+		a[i] = (int)(descpart * 10) + '0';
+		descpart = (descpart * 10) - (int)(descpart * 10);
+		prec--;
+		i++;
 	}
+	a[i] = '\0';
+	return (ft_strjoin(cintpart, a));
 }

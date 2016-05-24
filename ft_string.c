@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 14:08:05 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/24 10:21:52 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/24 11:38:40 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ int	ft_string(t_module *module, va_list args)
 	if (!module->flag.moins)
 		module->prec >= 0 ? ft_putstrlen(value, module->prec) : ft_putstr(value);
 	free(value);
-	return (module->width == 0 ? len : module->width);
+	return (module->width > module->prec ? module->width : module->prec);
 }
