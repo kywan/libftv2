@@ -43,7 +43,7 @@ OBJ=ft_putchar.o ft_putchar_fd.o \
 	ft_strcleanc.o \
 	ft_strnew.o ft_strdel.o ft_striter.o ft_striteri.o \
 	ft_strjoin.o \
-	ft_itoa.o \
+	ft_itoa.o ft_ftoa.o\
 	ft_atoi.o \
 	ft_putnbr.o ft_putnbr_fd.o \
 	ft_swap_ptr.o \
@@ -57,6 +57,7 @@ OBJ=ft_putchar.o ft_putchar_fd.o \
 	ft_tolower.o \
 	ft_toupper.o
 GNL=get_next_line.o
+MATH=ft_pow.o
 PRINTF=ft_printf.o \
 	   ft_createelem.o \
 	   ft_display.o \
@@ -76,7 +77,7 @@ PRINTF=ft_printf.o \
 ##                   COMPILATION RULES : DONT TOUCH: IT'S MAGIC               ##
 ##                                                                            ##
 ################################################################################
-LIB_CONTENT=$(OBJ) $(MEMORY) $(LIST) $(GNL) $(PRINTF)
+LIB_CONTENT=$(OBJ) $(MEMORY) $(LIST) $(GNL) $(PRINTF) $(MATH)
 
 all: $(NAME)
 

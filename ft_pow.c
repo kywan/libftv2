@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/11 17:46:17 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/20 17:01:03 by pgrassin         ###   ########.fr       */
+/*   Created: 2016/05/20 17:29:18 by pgrassin          #+#    #+#             */
+/*   Updated: 2016/05/20 17:34:22 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-
-void	ft_putnbr(long long nbr)
+double	ft_pow(double x, int y)
 {
-	unsigned long long	i;
+	float	temp;
 
-	if (nbr < 0)
-	{
-		ft_putchar('-');
-		i = -(unsigned long long)nbr;
-	}
+	if (y == 0)
+		return (1);
+	temp = ft_pow(x, y/2);
+	if (y % 2 == 0)
+		return (temp * temp);
 	else
-		i = (unsigned long long)nbr;
-	if (i >= 10)
 	{
-		ft_putnbr(i / 10);
-		ft_putnbr(i % 10);
+		if (y > 0)
+			return (x * temp * temp);
+		else
+			return ((temp * temp) / x);
 	}
-	else
-		ft_putchar((char)i + '0');
 }

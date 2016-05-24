@@ -6,13 +6,14 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 14:08:05 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 14:30:59 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/24 10:21:52 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <stdarg.h>
 #include <libft.h>
+#include <stdlib.h>
 
 int	ft_string(t_module *module, va_list args)
 {
@@ -24,7 +25,7 @@ int	ft_string(t_module *module, va_list args)
 	value = ft_strdup(va_arg(args, char*));
 	len = ft_strlen(value);
 	if (module->flag.moins)
-		ft_putstr(value);
+		module->prec >= 0 ? ft_putstrlen(value, module->prec) : ft_putstr(value);
 	while (i > len)
 	{
 		if (module->flag.zero && !module->flag.moins)
@@ -34,7 +35,7 @@ int	ft_string(t_module *module, va_list args)
 		i--;
 	}
 	if (!module->flag.moins)
-		ft_putstr(value);
+		module->prec >= 0 ? ft_putstrlen(value, module->prec) : ft_putstr(value);
 	free(value);
 	return (module->width == 0 ? len : module->width);
 }

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:50:07 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/03/24 12:46:12 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/24 10:15:55 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,12 @@ int					ft_atoi(char *c);
 
 char				*ft_itoa(int n);
 
+int					ft_itos(int x, char str[], int d);
+
+void				ft_ftoa(float n, char *res, int prec);
+
+double				ft_pow(double x, int y);
+
 char				*ft_strcat(char *dest, const char *src);
 
 int					ft_strcmp(const char *s1, const char *s2);
@@ -144,6 +150,8 @@ void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int i);
 
 void				ft_putstr(const char *c);
+
+void				ft_putstrlen(const char *c, int len);
 
 void				ft_putstr_fd(char const *c, int fd);
 
