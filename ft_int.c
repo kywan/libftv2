@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/24 10:09:19 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/27 18:09:28 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,42 @@ int	ft_uint(t_module *module, va_list args)
 
 int				ft_int(t_module *module, va_list args)
 {
-	int	value;
+	__int128	value;
 	int	value_len;
 	char	*value_str;
+	int		i;
 
-	value = va_arg(args, int);
-	value_str = ft_itoa(value);
+	value = (__int128)va_arg(args, long long);
+	value_str = ft_i128toa(value, 10, "0123456789");
 	value_len = ft_strlen(value_str);
-	module->width -= value_len;
-	while (module->prec >= 0 || module->width > 0)
+	module->prec > 0 ? module->width -= module->prec : module->width;
+	module->prec > 0 ? module->prec -= value_len : module->prec;
+	i = module->width - 1;
+	if (module->flag.moins)
 	{
-		
+		while (module->prec > 0)
+		{
+			ft_putchar('0');
+			module->prec--;
+		}
+		ft_putstr(value_str);
 	}
-	return (1);
+	while (i > value_len)
+	{
+		if (module->flag.zero && !module->flag.moins)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
+		i--;
+	}
+	if (!module->flag.moins)
+	{
+		while (module->prec > 0)
+		{
+			ft_putchar('0');
+			module->prec--;
+		}
+		ft_putstr(value_str);
+	}
+	return (module->prec > 0 ? module->width + module->prec : module->width + value_len);
 }

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 14:26:05 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/27 20:12:24 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	ft_other_type(t_module *module)
 	}
 	if (!module->flag.moins)
 		ft_putchar(module->type);
-	return (module->width == 0 ? 1 : module->width);
+	return (module->width > 0 ? module->width : 1);
 }
 
 int	ft_valid_type(t_module *module, va_list args)

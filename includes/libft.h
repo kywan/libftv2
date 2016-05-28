@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:50:07 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/24 11:28:17 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/28 14:51:28 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ int					ft_atoi(char *c);
 
 char				*ft_itoa(int n);
 
+char				*ft_i128toa(__int128 n,unsigned int base, char *map);
+
 char				*ft_ftoa(float n, int prec);
 
 double				ft_pow(double x, int y);
@@ -149,9 +151,9 @@ void				ft_putchar(char c);
 
 void				ft_putchar_fd(char c, int i);
 
-void				ft_putstr(const char *c);
+int					ft_putstr(const char *c);
 
-void				ft_putstrlen(const char *c, int len);
+int					ft_putstrlen(const char *c, int len);
 
 void				ft_putstr_fd(char const *c, int fd);
 
