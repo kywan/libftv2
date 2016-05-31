@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/27 18:09:28 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/31 14:26:34 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <ft_printf.h>
 #include <libft.h>
+#include <stdint.h>
 
 int	ft_uint(t_module *module, va_list args)
 {
@@ -27,42 +28,60 @@ int	ft_uint(t_module *module, va_list args)
 
 int				ft_int(t_module *module, va_list args)
 {
-	__int128	value;
+	intmax_t	value;
 	int	value_len;
 	char	*value_str;
 	int		i;
+	int		total;
 
-	value = (__int128)va_arg(args, long long);
-	value_str = ft_i128toa(value, 10, "0123456789");
+	total = 0;
+	value = (intmax_t)va_arg(args, int);
+	value_str = ft_imaxtoa((value < 0 ? value * -1 : value), 10, "0123456789");
 	value_len = ft_strlen(value_str);
-	module->prec > 0 ? module->width -= module->prec : module->width;
-	module->prec > 0 ? module->prec -= value_len : module->prec;
-	i = module->width - 1;
+	module->prec = module->prec > 0 ? module->prec -= value_len : -1;
+	module->width -= module->prec > 0 ? module->prec :  value_len;
+	i = module->width;
+	if (module->flag.plus || module->flag.space || value < 0)
+		i--;
 	if (module->flag.moins)
 	{
+		if (module->flag.plus || value < 0)
+			total += value >= 0 ? ft_putchar('+') : ft_putchar('-');
+		else if (module->flag.space && value >= 0)
+			total += ft_putchar(' ');
 		while (module->prec > 0)
 		{
-			ft_putchar('0');
+			total += ft_putchar('0');
 			module->prec--;
 		}
-		ft_putstr(value_str);
+		total += ft_putstr(value_str);
 	}
-	while (i > value_len)
+	if ((module->flag.plus || value < 0) && !module->flag.moins && module->flag.zero) // le cas du moins est gerrer au dessus
+		total += value >= 0 ? ft_putchar('+') : ft_putchar('-');
+	else if (module->flag.space && value >= 0 && !module->flag.moins && module->flag.zero)
+		total += module->flag.space && value >= 0 ? ft_putchar(' ') : 0;
+	while (i > 0)
 	{
 		if (module->flag.zero && !module->flag.moins)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');
 		i--;
+		total ++;
 	}
 	if (!module->flag.moins)
 	{
+		if ((module->flag.plus || value < 0) && !module->flag.moins && !module->flag.zero)
+			total += value >= 0 ? ft_putchar('+') : ft_putchar('-');
+		else if (module->flag.space && value >= 0 && !module->flag.moins && !module->flag.zero)
+			total += module->flag.space && value >= 0 ? ft_putchar(' ') : 0;
 		while (module->prec > 0)
 		{
-			ft_putchar('0');
+			total += ft_putchar('0');
 			module->prec--;
 		}
-		ft_putstr(value_str);
+		total += ft_putstr(value_str);
 	}
-	return (module->prec > 0 ? module->width + module->prec : module->width + value_len);
+
+	return (total);
 }

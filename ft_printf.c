@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/27 20:10:32 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/31 11:32:33 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h> //a  suprimer juste pour debug
@@ -49,10 +49,10 @@ static int		ft_gestion(const char *str, va_list args)
 			s += ft_check_prec(s, work_module);
 			s += ft_check_modif(s, work_module);
 			work_module->type = *s;
-			if (ft_error(work_module) != no_error)
+			/*if (ft_error(work_module) != no_error)
 			{
 				//il y q une error
-			}
+			}*/
 //				ft_debug(work_module); //a suprimer
 		}
 		else

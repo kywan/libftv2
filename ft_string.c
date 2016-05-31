@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 14:08:05 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/28 16:23:58 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/31 14:53:01 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int	ft_string(t_module *module, va_list args)
 	int		len;
 	char	*value;
 	int		total;
+	int		ter;
 
-	len = ft_strlen(value);
 	value = ft_strdup(va_arg(args, char*));
+	len = ft_strlen(value);
 	total = 0;
 	if (module->flag.moins)
 		total = module->prec >= 0 ? ft_putstrlen(value, module->prec) : ft_putstr(value);
-	i = module->width - 1 - (module->prec >= 0 && module->prec < len ? module->prec : len ); // retirer la precision si elle est >= 0
+	ter = (module->prec >= 0 && module->prec < len ? module->prec : len ); // retirer la precision si elle est >= 0
+	i = module->width - ter;
 	module->width = i;
 	while (i > 0/*(len > module->prec ? module->prec : len)*/)
 	{

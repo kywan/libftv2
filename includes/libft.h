@@ -6,13 +6,14 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:50:07 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/28 14:51:28 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/05/31 13:00:02 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <stdint.h>
 
 typedef struct		s_list
 {
@@ -121,7 +122,7 @@ int					ft_atoi(char *c);
 
 char				*ft_itoa(int n);
 
-char				*ft_i128toa(__int128 n,unsigned int base, char *map);
+char				*ft_imaxtoa(intmax_t n,unsigned int base, char *map);
 
 char				*ft_ftoa(float n, int prec);
 
@@ -147,7 +148,7 @@ char				*ft_strstr(const char *s1, const char *s2);
 
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 
-void				ft_putchar(char c);
+int					ft_putchar(char c);
 
 void				ft_putchar_fd(char c, int i);
 
