@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/31 10:18:41 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/07 16:18:12 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@ static int	ft_cast(t_module *m, va_list args)
 	const char	*_unsigned = "ouxX";
 	
 	if (ft_strchr(_signed, m->type) && ft_strcmp(m->modif, "l") == 0)
-		return (ft_int(m, args));
+		return (ft_long(m, args));
+	if (ft_strchr("u", m->type))
+		return (ft_uint(m, args));
 	else if(ft_strchr(_signed, m->type) && (ft_strcmp(m->modif, "ll") == 0
 				|| m->modif[0] == 'j'))
-		return (ft_int(m, args));
-	else if ((ft_strchr(_signed, m->type) && (m->modif[0] == '\0'
-					|| m->modif[0] == 'h')) || m->type == 'c') //prend en compte modif h et hh
-		return (ft_int(m, args));
+		return (ft_longlong(m, args));
+	else if (ft_strchr(_signed, m->type) && (m->modif[0] == '\0'
+					|| m->modif[0] == 'h')) //prend en compte modif h et hh
+		return (ft_short(m, args));
 	else if(ft_strchr(_unsigned, m->type) && ft_strcmp(m->modif, "l") == 0)
-		return (ft_int(m, args));
-	else if(ft_strchr(_unsigned, m->type) && (ft_strcmp(m->modif, "ll") == 0
-				|| m->modif[0] == 'j'))
+		return (ft_ulong(m, args));
+	else if(ft_strchr(_unsigned, m->type) && (ft_strcmp(m->modif, "ll") == 0))
 		return (ft_ulonglong(m, args));
-	else if ((ft_strchr(_unsigned, m->type) && (m->modif[0] == '\0'
-					|| m->modif[0] == 'h')) || m->type == 'c') //penser au char
-		return (ft_int(m, args));
+	else if (ft_strchr(_unsigned, m->type) && m->modif[0] == 'h') //penser au char
+		return (ft_ushort(m, args));
 	else if ((ft_strchr(_signed, m->type) || ft_strchr(_unsigned, m->type))
 			&& m->modif[0] == 'z')
-		return (ft_int(m, args));
+		return (ft_sizet(m, args));
 	else if (m->type == 's')
 		return (ft_string(m, args));
 	else

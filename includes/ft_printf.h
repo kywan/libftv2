@@ -6,14 +6,14 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 14:09:56 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/02 18:14:00 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
-
+#include <stdint.h>
 typedef struct			s_flag
 {
 	int					moins;
@@ -31,7 +31,8 @@ typedef struct			s_module
 	int					prec;
 	char				*modif;
 	char				type;
-	void				*arg;
+	char				*val_str;
+	int					val_len;
 	struct s_module		*next;
 }						t_module;
 
@@ -66,5 +67,11 @@ int	ft_ulong(t_module *module, va_list args);
 int	ft_ulonglong(t_module *module, va_list args);
 
 int	ft_string(t_module *module, va_list args);
+
+int					ft_int_init(t_module *module, intmax_t val, int base, char *base_str);
+
+int					ft_int_moins(t_module *module, intmax_t val, int i, int prec);
+
+int					ft_int_nmoins(t_module *module, intmax_t val, int i, int prec);
 
 #endif

@@ -67,7 +67,7 @@ PRINTF=ft_printf.o \
 	   ft_flag.o \
 	   ft_type.o \
 	   ft_prec.o \
-	   ft_int.o \
+	   ft_int.o ft_uint.o \
 	   ft_long.o \
 	   ft_longlong.o \
 	   ft_sizet.o \

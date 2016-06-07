@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/31 14:26:34 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/07 16:03:22 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,72 +16,76 @@
 #include <libft.h>
 #include <stdint.h>
 
-int	ft_uint(t_module *module, va_list args)
+int				ft_int_init(t_module *m, intmax_t val, int base, char *base_str)
 {
-	unsigned int	*tmp;
+	int		i;
 
-	module->flag.zero = 0; //a suprimer
-	tmp = (unsigned int *)malloc(sizeof(int));
-	*tmp = (unsigned int)va_arg(args, unsigned int);
-	return (1);
+	m->val_str = ft_imaxtoa((val < 0 ? val * -1 : val), base, base_str);
+	m->val_len = ft_strlen(m->val_str);
+	m->width -= m->prec > 0 ? m->prec : m->val_len;
+	m->prec = m->prec > 0 ? m->prec -= m->val_len : -1;
+	i = m->width;
+	if (m->flag.plus || m->flag.space || val < 0)
+		i--;
+	return (i);
 }
 
-int				ft_int(t_module *module, va_list args)
+int				ft_int_moins(t_module *m,intmax_t val,int i, int prec)
 {
-	intmax_t	value;
-	int	value_len;
-	char	*value_str;
-	int		i;
 	int		total;
 
 	total = 0;
-	value = (intmax_t)va_arg(args, int);
-	value_str = ft_imaxtoa((value < 0 ? value * -1 : value), 10, "0123456789");
-	value_len = ft_strlen(value_str);
-	module->prec = module->prec > 0 ? module->prec -= value_len : -1;
-	module->width -= module->prec > 0 ? module->prec :  value_len;
-	i = module->width;
-	if (module->flag.plus || module->flag.space || value < 0)
-		i--;
-	if (module->flag.moins)
-	{
-		if (module->flag.plus || value < 0)
-			total += value >= 0 ? ft_putchar('+') : ft_putchar('-');
-		else if (module->flag.space && value >= 0)
-			total += ft_putchar(' ');
-		while (module->prec > 0)
-		{
-			total += ft_putchar('0');
-			module->prec--;
-		}
-		total += ft_putstr(value_str);
-	}
-	if ((module->flag.plus || value < 0) && !module->flag.moins && module->flag.zero) // le cas du moins est gerrer au dessus
-		total += value >= 0 ? ft_putchar('+') : ft_putchar('-');
-	else if (module->flag.space && value >= 0 && !module->flag.moins && module->flag.zero)
-		total += module->flag.space && value >= 0 ? ft_putchar(' ') : 0;
-	while (i > 0)
-	{
-		if (module->flag.zero && !module->flag.moins)
-			ft_putchar('0');
-		else
-			ft_putchar(' ');
-		i--;
-		total ++;
-	}
-	if (!module->flag.moins)
-	{
-		if ((module->flag.plus || value < 0) && !module->flag.moins && !module->flag.zero)
-			total += value >= 0 ? ft_putchar('+') : ft_putchar('-');
-		else if (module->flag.space && value >= 0 && !module->flag.moins && !module->flag.zero)
-			total += module->flag.space && value >= 0 ? ft_putchar(' ') : 0;
-		while (module->prec > 0)
-		{
-			total += ft_putchar('0');
-			module->prec--;
-		}
-		total += ft_putstr(value_str);
-	}
-
+	if (m->flag.plus || val < 0)
+		total += val >= 0 ? ft_putchar('+') : ft_putchar('-');
+	else if (m->flag.space && val >= 0)
+		total += ft_putchar(' ');
+	while (prec-- > 0)
+		total += ft_putchar('0');
+	if (m->prec)
+		total += ft_putstr(m->val_str);
+	while (i-- > 0)
+		total += ft_putchar(' '); // il ne peux il y avoir que des ' ' avec le flag moins
 	return (total);
+}
+
+int				ft_int_nmoins(t_module *m, intmax_t val, int i, int prec)
+{
+	int		total;
+
+	total = 0;
+	if ((m->flag.plus || val < 0) && m->flag.zero)
+		total += val >= 0 ? ft_putchar('+') : ft_putchar('-');
+	else if (m->flag.space && val >= 0 && m->flag.zero)
+		total += val >= 0 ? ft_putchar(' ') : 0;
+	while (i-- > 0)
+	{
+		if (m->flag.zero && m->prec< 0)
+			total += ft_putchar('0');
+		else
+			total += ft_putchar(' ');
+	}
+	if ((m->flag.plus || val < 0) && !m->flag.zero)
+		total += val >= 0 ? ft_putchar('+') : ft_putchar('-');
+	else if (m->flag.space && val >= 0 && !m->flag.zero)
+		total += m->flag.space && val >= 0 ? ft_putchar(' ') : 0;
+	while (prec-- > 0)
+	{
+		total += ft_putchar('0');
+	}
+	if (m->prec)
+		total += ft_putstr(m->val_str);
+	return (total);
+}
+
+int				ft_int(t_module *m, va_list args)
+{
+	intmax_t	val;
+	int			i;
+
+	val = (intmax_t)va_arg(args, int);
+	i = ft_int_init(m, val, 10, "0123456789");
+	if (m->flag.moins)
+		return (ft_int_moins(m, val, i, m->prec));
+	else
+		return (ft_int_nmoins(m, val, i, m->prec));
 }

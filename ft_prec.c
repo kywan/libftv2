@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 12:53:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/03/22 13:08:57 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/02 16:17:20 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_check_prec(char *str, t_module *module)
 			while ((prec /= 10) > 0)
 				i++;
 		}
+		else
+			module->prec = 0;
 		return (i);
 	}
 	return (i);
