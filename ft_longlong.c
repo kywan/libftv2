@@ -6,29 +6,34 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 14:05:07 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/07 17:43:41 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdlib.h>
 #include <ft_printf.h>
-int	ft_ulonglong(t_module *module, va_list args)
+int	ft_ulonglong(t_module *m, va_list args)
 {
-	unsigned long long	*tmp;
+	intmax_t	val;
+	int			i;
 
-
-	module->flag.zero = 0; //a suprimer
-	tmp = (unsigned long long *)malloc(sizeof(unsigned long long));
-	*tmp = (unsigned long long)va_arg(args, unsigned long long);
-	return (1);
+	val = (intmax_t)va_arg(args, unsigned long long);
+	i = ft_int_init(m, val, 10, "0123456789");
+	if (m->flag.moins)
+		return (ft_int_moins(m, val, i, m->prec));
+	else
+		return (ft_int_nmoins(m, val, i, m->prec));
 }
-int	ft_longlong(t_module *module, va_list args)
+int	ft_longlong(t_module *m, va_list args)
 {
-	long long	*tmp;
+	intmax_t	val;
+	int			i;
 
-	module->flag.zero = 0; //a suprimer
-	tmp = (long long *)malloc(sizeof(long long));
-	*tmp = (long long)va_arg(args, long long);
-	return (1);
+	val = (intmax_t)va_arg(args, long long);
+	i = ft_int_init(m, val, 10, "0123456789");
+	if (m->flag.moins)
+		return (ft_int_moins(m, val, i, m->prec));
+	else
+		return (ft_int_nmoins(m, val, i, m->prec));
 }

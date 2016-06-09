@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 17:24:42 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/31 11:10:16 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/09 15:28:15 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char		*ft_itoa(int n)
 	return (a);
 }
 
-static int	ft_imaxtoa_len(intmax_t n, int base)
+static int	ft_i128toa_len(__int128 n, int base)
 {
 	int	len;
 
@@ -52,7 +52,7 @@ static int	ft_imaxtoa_len(intmax_t n, int base)
 	return (len);
 }
 
-char		*ft_imaxtoa(intmax_t n, unsigned int base, char *map)
+char		*ft_i128toa(__int128 n, unsigned int base, char *map)
 {
 	char	*buf;
 	int		i;
@@ -60,7 +60,7 @@ char		*ft_imaxtoa(intmax_t n, unsigned int base, char *map)
 
 	if (base > ft_strlen(map))
 		return (NULL);
-	len = ft_imaxtoa_len(n, base);
+	len = ft_i128toa_len(n, base);
 	buf = (char *)malloc(sizeof(char) * (len + 1));
 	i = len;
 	buf[i--] = '\0';

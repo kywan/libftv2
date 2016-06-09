@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sizet.c                                         :+:      :+:    :+:   */
+/*   ft_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/07 16:52:50 by pgrassin         ###   ########.fr       */
+/*   Created: 2016/06/07 16:53:03 by pgrassin          #+#    #+#             */
+/*   Updated: 2016/06/07 17:28:59 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdlib.h>
+#include <libft.h>
 #include <ft_printf.h>
+#include <stdarg.h>
 
-int	ft_sizet(t_module *m, va_list args)
+int	ft_char(t_module *m, va_list args)
 {
-	intmax_t	val;
-	int			i;
+	int		i;
+	char	val;
+	int		total;
 
-	val = (intmax_t)va_arg(args, size_t);
-	i = ft_int_init(m, val, 10, "0123456789");
+	val = (char)va_arg(args, int);
+	total = 0;
 	if (m->flag.moins)
-		return (ft_int_moins(m, val, i, m->prec));
-	else
-		return (ft_int_nmoins(m, val, i, m->prec));
+		total += ft_putchar(val);
+	i = m->width - 1;
+	while (i > 0)
+	{
+		if (m->flag.zero && !m->flag.moins)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
+		i--;
+		total++;
+	}
+	if (!m->flag.moins)
+		total += ft_putchar(val);
+	return (total);
 }

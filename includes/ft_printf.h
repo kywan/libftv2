@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/02 18:14:00 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/07 17:59:52 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,21 @@ int						ft_display(const char *, t_module *mod, va_list args);
 int	ft_int(t_module *module, va_list args);
 int	ft_long(t_module *module, va_list args);
 int	ft_longlong(t_module *module, va_list args);
+int	ft_short(t_module *module, va_list args);
 int	ft_sizet(t_module *module, va_list args);
 
 int	ft_uint(t_module *module, va_list args);
 int	ft_ulong(t_module *module, va_list args);
 int	ft_ulonglong(t_module *module, va_list args);
+int	ft_ushort(t_module *module, va_list args);
 
 int	ft_string(t_module *module, va_list args);
+int	ft_char(t_module *module, va_list args);
 
-int					ft_int_init(t_module *module, intmax_t val, int base, char *base_str);
+int					ft_int_init(t_module *module, __int128 val, int base, char *base_str);
 
-int					ft_int_moins(t_module *module, intmax_t val, int i, int prec);
+int					ft_int_moins(t_module *module, __int128 val, int i, int prec);
 
-int					ft_int_nmoins(t_module *module, intmax_t val, int i, int prec);
+int					ft_int_nmoins(t_module *module, __int128 val, int i, int prec);
 
 #endif

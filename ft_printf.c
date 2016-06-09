@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/31 11:32:33 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/09 15:39:31 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h> //a  suprimer juste pour debug
@@ -24,10 +24,6 @@
 	printf("width = %d| prec = %d\n", module->width, module->prec);
 	printf("\tMODIF|TYPE|VALUE\n");
 	printf("modif = %s|type = %c| ", module->modif, module->type);
-	if (module->type == 'i')
-		printf("value = %d\n", (int)module->arg);
-	else
-		printf("value = %lld\n", (long long)module->arg);
 }*/
 
 static int		ft_gestion(const char *str, va_list args)
