@@ -6,14 +6,13 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/09 15:39:31 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/09 17:02:43 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h> //a  suprimer juste pour debug
 #include <stdarg.h>
 #include <ft_printf.h>
 #include <libft.h>
-#include <ft_error.h>
 #include <stdlib.h>
 
 /*static void		ft_debug(t_module *module)

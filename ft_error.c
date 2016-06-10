@@ -6,27 +6,26 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/05/17 14:25:34 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/09 17:04:13 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_error.h>
 #include <libft.h>
 #include <ft_printf.h>
 
 int	ft_display_error(int error, t_module *module)
 {
-	if (error == incompflag_zeromoins)
+	if (error == 0)
 		ft_putstr("[error] : le flag '0' est incompatible avec le flag '-'\n");
-	else if (error == incompflag_spaceplus)
+	else if (error == 1)
 		ft_putstr("[error] : le flag ' ' est incompatible avec le flag '+'\n");
-	else if (error == invalid_type)
+	else if (error == 2)
 	{
 		ft_putstr("[error] : le type ");
 		ft_putchar(module->type);
 		ft_putstr(" n'est pas un type valide \n");
 	}
-	else if (error == badmodif)
+	else if (error == 3)
 	{
 		ft_putstr("[error] : le type ");
 		ft_putchar(module->type);
@@ -40,7 +39,7 @@ int	ft_display_error(int error, t_module *module)
 
 int		ft_error(t_module *module)
 {
-	if (ft_valid_flag(module) != no_error)
+	if (ft_valid_flag(module) != 0)
 		return (-1);
-	return(no_error);
+	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 16:18:23 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/09 15:46:40 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/10 13:44:37 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,14 @@ int		ft_ushort(t_module *m, va_list args)
 	int				i;
 
 	val = (unsigned short)va_arg(args,unsigned int);
-	i = ft_int_init(m, (intmax_t)val, 10, "0123456789");
+	if (m->type == 'O' || m->type == 'o')
+		i = ft_int_init(m, val, 8, "01234567");
+	else if (m->type == 'x')
+		i = ft_int_init(m, val, 16, "0123456789abcdef");
+	else if (m->type == 'X')
+		i = ft_int_init(m, val, 16, "0123456789ABCDEF");
+	else
+		i = ft_int_init(m, (intmax_t)val, 10, "0123456789");
 	if (m->flag.moins)
 		return (ft_int_moins(m, val, i, m->prec));
 	else

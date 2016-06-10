@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 15:03:14 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/09 15:08:15 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/09 16:27:44 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,28 @@
 #include <libft.h>
 #include <ft_printf.h>
 
-int	ft_hexa(t_module *m, va_list args)
+int	ft_hexaminus(t_module *m, va_list args)
 {
-	char *pres_str;
-	
-	pres_str = va_arg(args, char *);
+	__int128	val;
+	int			i;
+
+	val = (__int128)va_arg(args, __int128);
+	i = ft_int_init(m, val, 16, "0123456789abcdef");
+	if (m->flag.moins)
+		return (ft_int_moins(m, val, i, m->prec));
+	else
+		return (ft_int_nmoins(m, val, i, m->prec));
+}
+
+int	ft_hexamax(t_module *m, va_list args)
+{
+	__int128	val;
+	int			i;
+
+	val = (__int128)va_arg(args, __int128);
+	i = ft_int_init(m, val, 16, "0123456789ABCDEF");
+	if (m->flag.moins)
+		return (ft_int_moins(m, val, i, m->prec));
+	else
+		return (ft_int_nmoins(m, val, i, m->prec));
 }

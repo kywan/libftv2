@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 17:24:42 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/09 15:28:15 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/09 16:19:25 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char		*ft_i128toa(__int128 n, unsigned int base, char *map)
 		n *= -1;
 	}
 	else if (n == 0)
-		buf[0] = map[0];
+		buf[i] = map[0];
 	while (n)
 	{
 		buf[i--] = map[n % base];

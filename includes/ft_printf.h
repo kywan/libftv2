@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/07 17:59:52 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/09 16:46:50 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ typedef struct			s_module
 	int					val_len;
 	struct s_module		*next;
 }						t_module;
+
+enum					e_type
+{
+	basic,
+	octal,
+	hexa,
+};
 
 int						ft_printf(const char *format, ...);
 

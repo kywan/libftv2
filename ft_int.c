@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/09 16:06:49 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/10 13:44:25 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int				ft_int_init(t_module *m, __int128 val, int base, char *base_str)
 
 	m->val_str = ft_i128toa((val < 0 ? val * -1 : val), base, base_str);
 	m->val_len = ft_strlen(m->val_str);
-	m->width -= m->prec > 0 ? m->prec : m->val_len;
 	m->prec = m->prec > 0 ? m->prec - m->val_len : -1;
+	m->width -= m->prec > 0 ? (m->prec + m->val_len) : m->val_len;
 	i = m->width;
 	if (m->flag.plus || m->flag.space || val < 0)
 		i--;
