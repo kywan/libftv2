@@ -6,17 +6,15 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/10 13:44:25 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 13:31:31 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include <stdlib.h>
 #include <ft_printf.h>
 #include <libft.h>
-#include <stdint.h>
 
-int				ft_int_init(t_module *m, __int128 val, int base, char *base_str)
+int				pf_int_init(t_module *m, __int128 val, int base, char *base_str)
 {
 	int		i;
 
@@ -30,7 +28,7 @@ int				ft_int_init(t_module *m, __int128 val, int base, char *base_str)
 	return (i);
 }
 
-int				ft_int_moins(t_module *m, __int128 val,int i, int prec)
+int				pf_int_moins(t_module *m, __int128 val,int i, int prec)
 {
 	int		total;
 
@@ -47,7 +45,7 @@ int				ft_int_moins(t_module *m, __int128 val,int i, int prec)
 	return (total);
 }
 
-int				ft_int_nmoins(t_module *m, __int128 val, int i, int prec)
+int				pf_int_nmoins(t_module *m, __int128 val, int i, int prec)
 {
 	int		total;
 
@@ -75,15 +73,15 @@ int				ft_int_nmoins(t_module *m, __int128 val, int i, int prec)
 	return (total);
 }
 
-int				ft_int(t_module *m, va_list args)
+int				pf_int(t_module *m, va_list args)
 {
 	__int128	val;
 	int			i;
 
 	val = (__int128)va_arg(args, int);
-	i = ft_int_init(m, val, 10, "0123456789");
+	i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (ft_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, m->prec));
 	else
-		return (ft_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, m->prec));
 }

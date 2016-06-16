@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   pf_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/09 17:02:43 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/10 14:27:12 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h> //a  suprimer juste pour debug
@@ -25,7 +25,7 @@
 	printf("modif = %s|type = %c| ", module->modif, module->type);
 }*/
 
-static int		ft_gestion(const char *str, va_list args)
+static int		pf_gestion(const char *str, va_list args)
 {
 	char	*s;
 	t_module	*start_module;
@@ -38,11 +38,11 @@ static int		ft_gestion(const char *str, va_list args)
 		if (ft_strchr(s, '%'))
 		{
 			s = ft_strchr(s, '%') + 1;
-			work_module = ft_createelem(&start_module);
-			s += ft_check_flag(s, work_module);
-			s += ft_check_width(s, work_module);
-			s += ft_check_prec(s, work_module);
-			s += ft_check_modif(s, work_module);
+			work_module = pf_createelem(&start_module);
+			s += pf_check_flag(s, work_module);
+			s += pf_check_width(s, work_module);
+			s += pf_check_prec(s, work_module);
+			s += pf_check_modif(s, work_module);
 			work_module->type = *s;
 			/*if (ft_error(work_module) != no_error)
 			{
@@ -51,10 +51,10 @@ static int		ft_gestion(const char *str, va_list args)
 //				ft_debug(work_module); //a suprimer
 		}
 		else
-			return (ft_display(str, start_module, args)/*pas plus de '%'*/);
+			return (pf_display(str, start_module, args)/*pas plus de '%'*/);
 		(*s)++;
 	}
-	return (ft_display(str, start_module, args));
+	return (pf_display(str, start_module, args));
 }
 
 int				ft_printf(const char *format, ...)
@@ -65,7 +65,7 @@ int				ft_printf(const char *format, ...)
 
 	total = 0;
 	va_start(args, format);
-	total = ft_gestion(format, args);
+	total = pf_gestion(format, args);
 	va_end(args);
 	return (total);
 }

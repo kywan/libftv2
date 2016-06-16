@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:58:14 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/02 17:15:00 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 13:27:49 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 #include <libft.h>
 #include <stdlib.h>
 
-static t_module	*ft_lstlastt(t_module *lst)
+static t_module	*pf_lstlastt(t_module *lst)
 {
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
 }
 
-static t_module	*ft_lst_push(t_module **lst, t_module *item)
+static t_module	*pf_lst_push(t_module **lst, t_module *item)
 {
 	if (!*lst)
 		*lst = item;
 	else
-		ft_lstlastt(*lst)->next = item;
+		pf_lstlastt(*lst)->next = item;
 	return (item);
 }
-t_module	*ft_createelem(t_module **start)
+
+t_module	*pf_createelem(t_module **start)
 {
 	t_module	*new;
 
@@ -45,5 +46,5 @@ t_module	*ft_createelem(t_module **start)
 	new->modif = (char *)malloc(sizeof(char) * 3);
 	new->type = '\0';
 	new->next = NULL;
-	return (ft_lst_push(start, new));
+	return (pf_lst_push(start, new));
 }

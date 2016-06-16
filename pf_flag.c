@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_width.c                                         :+:      :+:    :+:   */
+/*   pf_flag.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/17 12:33:03 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/03/22 13:07:22 by pgrassin         ###   ########.fr       */
+/*   Created: 2016/03/12 11:16:31 by pgrassin          #+#    #+#             */
+/*   Updated: 2016/06/16 13:28:49 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
-#include <libft.h>
 
-int	ft_check_width(char *str, t_module *module)
+int			pf_check_flag(char *str, t_module *module)
 {
 	int	i;
-	int	width;
 
 	i = 0;
-	width = ft_atoi(str);
-	module->width = width;
-	if (width > 0)
+	while (str[i])
+	{
+		if (str[i] == '-')
+			module->flag.moins = 1;
+		else if (str[i] == '+')
+			module->flag.plus = 1;
+		else if (str[i] == ' ')
+			module->flag.space = 1;
+		else if (str[i] == '#')
+			module->flag.diese = 1;
+		else if (str[i] == '0')
+			module->flag.zero = 1;
+		else
+			return (i);
 		i++;
-	while ((width /= 10) > 0)
-		i++;
+	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/09 16:46:50 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 14:01:36 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,52 +36,52 @@ typedef struct			s_module
 	struct s_module		*next;
 }						t_module;
 
-enum					e_type
-{
-	basic,
-	octal,
-	hexa,
-};
-
 int						ft_printf(const char *format, ...);
 
-int						ft_check_flag(char *str, t_module *module);
+int						pf_check_flag(char *str, t_module *module);
 
-int						ft_check_width(char *str, t_module *module);
+int						pf_check_width(char *str, t_module *module);
 
-int						ft_check_prec(char *str, t_module *module);
+int						pf_check_prec(char *str, t_module *module);
 
-int						ft_check_modif(char *str, t_module *module);
+int						pf_check_modif(char *str, t_module *module);
 
-int						ft_valid_flag(t_module *module);
+int						pf_valid_flag(t_module *module);
 
-int						ft_valid_type(t_module *module, va_list args);
+int						pf_valid_type(t_module *module, va_list args);
 
-int						ft_error(t_module *module);
+int						pf_display_error(int error, t_module *module);
 
-int						ft_display_error(int error, t_module *module);
+t_module				*pf_createelem(t_module **module);
 
-t_module				*ft_createelem(t_module **module);
+int						pf_display(const char *, t_module *mod, va_list args);
 
-int						ft_display(const char *, t_module *mod, va_list args);
-int	ft_int(t_module *module, va_list args);
-int	ft_long(t_module *module, va_list args);
-int	ft_longlong(t_module *module, va_list args);
-int	ft_short(t_module *module, va_list args);
-int	ft_sizet(t_module *module, va_list args);
+int						pf_int(t_module *module, va_list args);
 
-int	ft_uint(t_module *module, va_list args);
-int	ft_ulong(t_module *module, va_list args);
-int	ft_ulonglong(t_module *module, va_list args);
-int	ft_ushort(t_module *module, va_list args);
+int						pf_long(t_module *module, va_list args);
 
-int	ft_string(t_module *module, va_list args);
-int	ft_char(t_module *module, va_list args);
+int						pf_longlong(t_module *module, va_list args);
 
-int					ft_int_init(t_module *module, __int128 val, int base, char *base_str);
+int						pf_short(t_module *module, va_list args);
 
-int					ft_int_moins(t_module *module, __int128 val, int i, int prec);
+int						pf_sizet(t_module *module, va_list args);
 
-int					ft_int_nmoins(t_module *module, __int128 val, int i, int prec);
+int						pf_uint(t_module *module, va_list args);
+
+int						pf_ulong(t_module *module, va_list args);
+
+int						pf_ulonglong(t_module *module, va_list args);
+
+int						pf_ushort(t_module *module, va_list args);
+
+int						pf_string(t_module *module, va_list args);
+
+int						pf_char(t_module *module, va_list args);
+
+int						pf_int_init(t_module *module, __int128 val, int base, char *base_str);
+
+int						pf_int_moins(t_module *module, __int128 val, int i, int prec);
+
+int						pf_int_nmoins(t_module *module, __int128 val, int i, int prec);
 
 #endif

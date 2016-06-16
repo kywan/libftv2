@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 14:08:05 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/02 16:04:16 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 13:58:01 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <libft.h>
 #include <stdlib.h>
 
-int	ft_string(t_module *module, va_list args)
+int	pf_string(t_module *m, va_list args)
 {
 	int		i;
 	int		len;
@@ -26,22 +26,22 @@ int	ft_string(t_module *module, va_list args)
 	value = ft_strdup(va_arg(args, char*));
 	len = ft_strlen(value);
 	total = 0;
-	if (module->flag.moins)
-		total = module->prec >= 0 ? ft_putstrlen(value, module->prec) : ft_putstr(value);
-	ter = (module->prec >= 0 && module->prec < len ? module->prec : len); // retirer la precision si elle est >= 0
-	i = module->width - ter;
-	module->width = i;
-	while (i > 0/*(len > module->prec ? module->prec : len)*/)
+	if (m->flag.moins)
+		total = m->prec >= 0 ? ft_putstrlen(value, m->prec) : ft_putstr(value);
+	ter = (m->prec >= 0 && m->prec < len ? m->prec : len);
+	i = m->width - ter;
+	m->width = i;
+	while (i > 0)
 	{
-		if (module->flag.zero && !module->flag.moins)
+		if (m->flag.zero && !m->flag.moins)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');
 		i--;
 		total++;
 	}
-	if (!module->flag.moins)
-		total += module->prec >= 0 ? ft_putstrlen(value, module->prec) : ft_putstr(value);
+	if (!m->flag.moins)
+		total += m->prec >= 0 ? ft_putstrlen(value, m->prec) : ft_putstr(value);
 	free(value);
 	return (total);
 }

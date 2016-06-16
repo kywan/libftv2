@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_prec.c                                          :+:      :+:    :+:   */
+/*   ft_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/17 12:53:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/02 16:17:20 by pgrassin         ###   ########.fr       */
+/*   Created: 2016/06/07 16:53:03 by pgrassin          #+#    #+#             */
+/*   Updated: 2016/06/16 13:54:52 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <ft_printf.h>
+#include <stdarg.h>
 
-int	ft_check_prec(char *str, t_module *module)
+int	pf_char(t_module *m, va_list args)
 {
-	int	i;
-	int	prec;
+	int		i;
+	char	val;
+	int		total;
 
-	i = 0;
-	if (*str == '.')
+	val = (char)va_arg(args, int);
+	total = 0;
+	if (m->flag.moins)
+		total += ft_putchar(val);
+	i = m->width - 1;
+	while (i > 0)
 	{
-		i++;
-		if (ft_isdigit(*(++str)))
-		{
-			i++;
-			prec = ft_atoi(str);
-			module->prec = prec;
-			while ((prec /= 10) > 0)
-				i++;
-		}
+		if (m->flag.zero && !m->flag.moins)
+			ft_putchar('0');
 		else
-			module->prec = 0;
-		return (i);
+			ft_putchar(' ');
+		i--;
+		total++;
 	}
-	return (i);
+	if (!m->flag.moins)
+		total += ft_putchar(val);
+	return (total);
 }

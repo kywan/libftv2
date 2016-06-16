@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sizet.c                                         :+:      :+:    :+:   */
+/*   pf_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/07 16:52:50 by pgrassin         ###   ########.fr       */
+/*   Created: 2016/03/21 15:49:45 by pgrassin          #+#    #+#             */
+/*   Updated: 2016/06/16 13:27:57 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdlib.h>
 #include <ft_printf.h>
+#include <libft.h>
+#include <stdarg.h>
 
-int	ft_sizet(t_module *m, va_list args)
+int	pf_display(const char *str, t_module *module, va_list args)
 {
-	intmax_t	val;
-	int			i;
+	int	i;
+	int	j;
+	int	rab;
 
-	val = (intmax_t)va_arg(args, size_t);
-	i = ft_int_init(m, val, 10, "0123456789");
-	if (m->flag.moins)
-		return (ft_int_moins(m, val, i, m->prec));
-	else
-		return (ft_int_nmoins(m, val, i, m->prec));
+	i = 0;
+	rab = 0;
+	j = 0;
+	while (str[i +j])
+	{
+		if (str[i + j] == '%')
+		{
+			rab += pf_valid_type(module, args);
+			j++;
+			while (module->type && str[i + j] != module->type)
+				j++;
+			j++;
+			module = module->next;
+		}
+		else
+		{
+			ft_putchar(str[i + j]);
+			i++;
+		}
+	}
+	return (i + rab);
 }

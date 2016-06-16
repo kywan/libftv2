@@ -58,22 +58,21 @@ OBJ=ft_putchar.o ft_putchar_fd.o \
 	ft_toupper.o
 GNL=get_next_line.o
 MATH=ft_pow.o
-PRINTF=ft_printf.o \
-	   ft_createelem.o \
-	   ft_display.o \
-	   ft_error.o \
-	   ft_modif.o \
-	   ft_width.o \
-	   ft_flag.o \
-	   ft_type.o \
-	   ft_prec.o \
-	   ft_int.o ft_uint.o \
-	   ft_long.o \
-	   ft_longlong.o \
-	   ft_sizet.o \
-	   ft_string.o \
-	   ft_short.o \
-	   ft_char.o
+PRINTF=pf_printf.o \
+	   pf_createelem.o \
+	   pf_display.o \
+	   pf_modif.o \
+	   pf_width.o \
+	   pf_flag.o \
+	   pf_type.o \
+	   pf_prec.o \
+	   pf_int.o pf_uint.o \
+	   pf_long.o \
+	   pf_longlong.o \
+	   pf_sizet.o \
+	   pf_string.o \
+	   pf_short.o \
+	   pf_char.o
 ################################################################################
 ##                                                                            ##
 ##                   COMPILATION RULES : DONT TOUCH: IT'S MAGIC               ##
