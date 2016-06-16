@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:53:15 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 20:01:51 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	pf_sizet(t_module *m, va_list args)
 
 	m->flag.space = 0;
 	m->flag.plus = 0;
-	val = (intmax_t)va_arg(args, unsigned int);
+	val = (size_t)va_arg(args, unsigned int);
 	if (m->type == 'O' || m->type == 'o')
 		i = pf_int_init(m, val, 8, "01234567");
 	else if (m->type == 'x')
@@ -29,7 +29,7 @@ int	pf_sizet(t_module *m, va_list args)
 	else if (m->type == 'X')
 		i = pf_int_init(m, val, 16, "0123456789ABCDEF");
 	else
-	i = pf_int_init(m, val, 10, "0123456789");
+		i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
 		return (pf_int_moins(m, val, i, m->prec));
 	else

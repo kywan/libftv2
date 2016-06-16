@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 14:01:36 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 18:28:19 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,18 @@ int						pf_ushort(t_module *module, va_list args);
 int						pf_string(t_module *module, va_list args);
 
 int						pf_char(t_module *module, va_list args);
+
+int						pf_uchar(t_module *module, va_list args);
+
+int						pf_schar(t_module *module, va_list args);
+
+int						pf_wint(t_module *module, va_list args);
+
+int						pf_winchart(t_module *module, va_list args);
+
+int						pf_intmaxt(t_module *module, va_list args);
+
+int						pf_uintmaxt(t_module *module, va_list args);
 
 int						pf_int_init(t_module *module, __int128 val, int base, char *base_str);
 

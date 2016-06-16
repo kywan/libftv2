@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 15:28:17 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 19:27:25 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	pf_cast_unsigned(t_module *m, va_list args)
 	else if (ft_strcmp(m->modif, "hh") == 0)
 		return (pf_uchar(m, args));
 	else if (ft_strcmp(m->modif, "l") == 0
-			|| (m->type == 'o' && m->modif == NULL) || (m->type == 'U'))
+			|| (m->type == 'o' && m->modif == NULL) || (m->type == 'U')
+			|| (m->type == 'U' && m->modif == NULL))
 		return (pf_ulong(m, args));
 	else if (ft_strcmp(m->modif, "ll") == 0)
 		return (pf_ulonglong(m, args));
@@ -79,10 +80,12 @@ static int	pf_cast_string(t_module *m, va_list args)
 	else if (m->type == 'c')
 		return (pf_char(m, args));
 	else if ((m->type == 'S' && m->modif == NULL)
-			|| (m->type == 's' && ft_strcmp(m->modif, "l")))
+			|| (m->type == 's' && ft_strcmp(m->modif, "l") == 0))
 		return (pf_winchart(m, args));
 	else if (m->type == 's')
 		return (pf_string(m, args));
+	else if (m->type == 'U')
+		return (pf_ulong(m, args));
 	else
 		return (pf_other_type(m));
 }
@@ -91,7 +94,7 @@ int	pf_valid_type(t_module *module, va_list args)
 {
 	const char	*_signed = "diD";
 	const char	*_unsigned = "oOuxX";
-	const char	*_string = "cCsS";
+	const char	*_string = "cCsSU";
 
 	if (ft_strchr(_signed, module->type))
 		return (pf_cast_signed(module, args));

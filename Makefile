@@ -60,6 +60,7 @@ GNL=get_next_line.o
 MATH=ft_pow.o
 PRINTF=pf_printf.o \
 	   pf_createelem.o \
+	   pf_short.o \
 	   pf_display.o \
 	   pf_modif.o \
 	   pf_width.o \
@@ -71,8 +72,9 @@ PRINTF=pf_printf.o \
 	   pf_longlong.o \
 	   pf_sizet.o \
 	   pf_string.o \
-	   pf_short.o \
-	   pf_char.o
+	   pf_char.o \
+	   pf_intmaxt.o \
+	   pf_w_t.o
 ################################################################################
 ##                                                                            ##
 ##                   COMPILATION RULES : DONT TOUCH: IT'S MAGIC               ##

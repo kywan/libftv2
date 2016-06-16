@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_short.c                                         :+:      :+:    :+:   */
+/*   pf_short.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 16:18:23 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:54:46 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/16 18:36:39 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		pf_short(t_module *m, va_list args)
 		return (pf_int_nmoins(m, val, i, m->prec));
 }
 
-int		ft_ushort(t_module *m, va_list args)
+int		pf_ushort(t_module *m, va_list args)
 {
 	unsigned short	val;
 	int				i;
