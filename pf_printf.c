@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/10 14:27:12 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 15:05:44 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h> //a  suprimer juste pour debug
@@ -44,14 +44,10 @@ static int		pf_gestion(const char *str, va_list args)
 			s += pf_check_prec(s, work_module);
 			s += pf_check_modif(s, work_module);
 			work_module->type = *s;
-			/*if (ft_error(work_module) != no_error)
-			{
-				//il y q une error
-			}*/
 //				ft_debug(work_module); //a suprimer
 		}
 		else
-			return (pf_display(str, start_module, args)/*pas plus de '%'*/);
+			return (pf_display(str, start_module, args));
 		(*s)++;
 	}
 	return (pf_display(str, start_module, args));

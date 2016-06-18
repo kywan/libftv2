@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:35:58 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:35:00 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 15:13:45 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	pf_check_next(char c, t_module *module)
 	return (1);
 }
 
-int	pf_check_modif(char *str, t_module *module)
+int			pf_check_modif(char *str, t_module *module)
 {
 	if (str[0] == 'h' || str[0] == 'l')
 	{

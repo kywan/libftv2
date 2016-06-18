@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 15:49:45 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:27:57 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 15:06:06 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	pf_display(const char *str, t_module *module, va_list args)
 	i = 0;
 	rab = 0;
 	j = 0;
-	while (str[i +j])
+	while (str[i + j])
 	{
 		if (str[i + j] == '%')
 		{

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:58:14 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:27:49 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 15:06:38 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_module	*pf_lst_push(t_module **lst, t_module *item)
 	return (item);
 }
 
-t_module	*pf_createelem(t_module **start)
+t_module		*pf_createelem(t_module **start)
 {
 	t_module	*new;
 

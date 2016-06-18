@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 19:27:25 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 15:27:40 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	pf_other_type(t_module *module)
 {
 	int	i;
 
+	if (module->type == '\0')
+		return (0);
 	i = module->width - 1;
 	if (module->flag.moins)
 		ft_putchar(module->type);
@@ -90,17 +92,17 @@ static int	pf_cast_string(t_module *m, va_list args)
 		return (pf_other_type(m));
 }
 
-int	pf_valid_type(t_module *module, va_list args)
+int			pf_valid_type(t_module *module, va_list args)
 {
-	const char	*_signed = "diD";
-	const char	*_unsigned = "oOuxX";
-	const char	*_string = "cCsSU";
+	const char	*csigned = "diD";
+	const char	*cunsigned = "oOuxX";
+	const char	*cstring = "cCsSU";
 
-	if (ft_strchr(_signed, module->type))
+	if (ft_strchr(csigned, module->type))
 		return (pf_cast_signed(module, args));
-	else if (ft_strchr(_unsigned, module->type))
+	else if (ft_strchr(cunsigned, module->type))
 		return (pf_cast_unsigned(module, args));
-	else if (ft_strchr(_string, module->type))
+	else if (ft_strchr(cstring, module->type))
 		return (pf_cast_string(module, args));
 	else
 		return (pf_other_type(module));

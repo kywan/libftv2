@@ -6,14 +6,15 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 18:28:19 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 15:13:22 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
-#include <stdint.h>
+# include <stdint.h>
+
 typedef struct			s_flag
 {
 	int					moins;
@@ -54,7 +55,7 @@ int						pf_display_error(int error, t_module *module);
 
 t_module				*pf_createelem(t_module **module);
 
-int						pf_display(const char *, t_module *mod, va_list args);
+int						pf_display(const char *s, t_module *mod, va_list args);
 
 int						pf_int(t_module *module, va_list args);
 
@@ -90,10 +91,10 @@ int						pf_intmaxt(t_module *module, va_list args);
 
 int						pf_uintmaxt(t_module *module, va_list args);
 
-int						pf_int_init(t_module *module, __int128 val, int base, char *base_str);
+int						pf_int_init(t_module *m, __int128 v, int b, char *b_s);
 
-int						pf_int_moins(t_module *module, __int128 val, int i, int prec);
+int						pf_int_moins(t_module *m, __int128 v, int i, int prec);
 
-int						pf_int_nmoins(t_module *module, __int128 val, int i, int prec);
+int						pf_int_nmoins(t_module *m, __int128 v, int i, int prec);
 
 #endif

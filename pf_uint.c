@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 16:59:51 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 15:47:24 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 15:07:56 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		pf_uint(t_module *m, va_list args)
 	else if (m->type == 'X')
 		i = pf_int_init(m, val, 16, "0123456789ABCDEF");
 	else
-	i = pf_int_init(m, val, 10, "0123456789");
+		i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
 		return (pf_int_moins(m, val, i, m->prec));
 	else
