@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 14:08:05 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:15:24 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/19 15:21:24 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	pf_string(t_module *m, va_list args)
 	char	*value;
 	int		total;
 
-	value = ft_strdup(va_arg(args, char*));
-	value == NULL ? value = ft_strdup("null") : 0;
+	if (!(value = ft_strdup(va_arg(args, char*))))
+		value = ft_strdup("(null)");
 	len = ft_strlen(value);
 	total = 0;
 	if (m->flag.moins)

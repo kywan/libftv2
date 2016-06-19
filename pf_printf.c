@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:05:44 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/19 15:21:59 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h> //a  suprimer juste pour debug
@@ -15,7 +15,7 @@
 #include <libft.h>
 #include <stdlib.h>
 
-/*static void		ft_debug(t_module *module)
+static void		ft_debug(t_module *module)
 {
 	printf("__________________________\n\tFLAGS\n");
 	printf("'-' = %d|'+' = %d|' ' = %d|'#' = %d|'0' = %d\n",module->flag.moins,module->flag.plus,module->flag.space,module->flag.diese,module->flag.zero);
@@ -23,7 +23,9 @@
 	printf("width = %d| prec = %d\n", module->width, module->prec);
 	printf("\tMODIF|TYPE|VALUE\n");
 	printf("modif = %s|type = %c| ", module->modif, module->type);
-}*/
+	if (module->type == '\x00')
+		printf("pppppppppp");
+}
 
 static int		pf_gestion(const char *str, va_list args)
 {
@@ -43,8 +45,9 @@ static int		pf_gestion(const char *str, va_list args)
 			s += pf_check_width(s, work_module);
 			s += pf_check_prec(s, work_module);
 			s += pf_check_modif(s, work_module);
+			s += pf_check_flag(s, work_module);
 			work_module->type = *s;
-//				ft_debug(work_module); //a suprimer
+			ft_debug(work_module); //a suprimer
 		}
 		else
 			return (pf_display(str, start_module, args));

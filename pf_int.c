@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:26:08 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/19 15:17:52 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 static int		pf_int_diese(t_module *m, __int128 val)
 {
-	if (val != 0)
+	if (val != 0 || m->type == 'p')
 	{
 		if (m->type == 'o' || m->type == 'O')
 			return (ft_putchar('0'));
-		else if (m->type == 'x')
+		else if (m->type == 'x' || m->type == 'p')
 			return (ft_putstr("0x"));
 		else if (m->type == 'X')
 			return (ft_putstr("0X"));
@@ -36,14 +36,16 @@ int				pf_int_init(t_module *m, __int128 val, int base, char *base_str)
 	m->val_len = ft_strlen(m->val_str);
 	m->prec = m->prec > 0 ? m->prec - m->val_len : -1;
 	m->width -= m->prec > 0 ? (m->prec + m->val_len) : m->val_len;
+	m->prec < 0 ? m->prec = -1 : 0;
 	i = m->width;
 	if (m->flag.plus || m->flag.space || val < 0)
 		i--;
 	if (m->flag.diese)
 	{
-		if (m->type == 'o' || m->type == 'O')
+		if ((m->type == 'o' || m->type == 'O') && val > 0)
 			i--;
-		else if (m->type == 'x' || m->type == 'X')
+		else if (((m->type == 'x' || m->type == 'X') && val > 0)
+				|| (m->type == 'p'))
 			i -= 2;
 	}
 	return (i);
@@ -87,9 +89,7 @@ int				pf_int_nmoins(t_module *m, __int128 val, int i, int prec)
 	else if ((m->flag.space || m->flag.diese) && val >= 0 && !m->flag.zero)
 		total += m->flag.space ? ft_putchar(' ') : pf_int_diese(m, val);
 	while (prec-- > 0)
-	{
 		total += ft_putchar('0');
-	}
 	total += ft_putstr(m->val_str);
 	return (total);
 }

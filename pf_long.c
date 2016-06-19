@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:54:25 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 16:44:15 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	pf_ulong(t_module *m, va_list args)
 	val = (__int128)va_arg(args, unsigned long);
 	if (m->type == 'O' || m->type == 'o')
 		i = pf_int_init(m, val, 8, "01234567");
-	else if (m->type == 'x')
+	else if (m->type == 'x' || m->type == 'p')
 		i = pf_int_init(m, val, 16, "0123456789abcdef");
 	else if (m->type == 'X')
 		i = pf_int_init(m, val, 16, "0123456789ABCDEF");

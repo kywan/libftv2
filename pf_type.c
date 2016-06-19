@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:27:40 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/18 16:43:39 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ static int	pf_cast_unsigned(t_module *m, va_list args)
 	else if (ft_strcmp(m->modif, "hh") == 0)
 		return (pf_uchar(m, args));
 	else if (ft_strcmp(m->modif, "l") == 0
-			|| (m->type == 'o' && m->modif == NULL) || (m->type == 'U')
-			|| (m->type == 'U' && m->modif == NULL))
+			|| (m->type == 'o' && m->modif == NULL))
 		return (pf_ulong(m, args));
 	else if (ft_strcmp(m->modif, "ll") == 0)
 		return (pf_ulonglong(m, args));
@@ -56,8 +55,6 @@ static int	pf_other_type(t_module *module)
 {
 	int	i;
 
-	if (module->type == '\0')
-		return (0);
 	i = module->width - 1;
 	if (module->flag.moins)
 		ft_putchar(module->type);
@@ -86,6 +83,11 @@ static int	pf_cast_string(t_module *m, va_list args)
 		return (pf_winchart(m, args));
 	else if (m->type == 's')
 		return (pf_string(m, args));
+	else if (m->type == 'p')
+	{
+		m->flag.diese = 1;
+		return (pf_ulong(m, args));
+	}
 	else if (m->type == 'U')
 		return (pf_ulong(m, args));
 	else
@@ -96,9 +98,11 @@ int			pf_valid_type(t_module *module, va_list args)
 {
 	const char	*csigned = "diD";
 	const char	*cunsigned = "oOuxX";
-	const char	*cstring = "cCsSU";
+	const char	*cstring = "cCsSpU";
 
-	if (ft_strchr(csigned, module->type))
+	if (module->type == '\x00')
+		return (0);
+	else if (ft_strchr(csigned, module->type))
 		return (pf_cast_signed(module, args));
 	else if (ft_strchr(cunsigned, module->type))
 		return (pf_cast_unsigned(module, args));
