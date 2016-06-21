@@ -6,14 +6,15 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:54:34 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:25:07 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdlib.h>
 #include <ft_printf.h>
-int	pf_ulonglong(t_module *m, va_list args)
+
+int	pf_ulonglong(t_module *m, va_list args, int fd)
 {
 	intmax_t	val;
 	int			i;
@@ -30,11 +31,12 @@ int	pf_ulonglong(t_module *m, va_list args)
 	else
 		i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }
-int	pf_longlong(t_module *m, va_list args)
+
+int	pf_longlong(t_module *m, va_list args, int fd)
 {
 	intmax_t	val;
 	int			i;
@@ -42,7 +44,7 @@ int	pf_longlong(t_module *m, va_list args)
 	val = (intmax_t)va_arg(args, long long);
 	i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }

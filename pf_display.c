@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 15:49:45 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/19 19:20:32 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 15:37:54 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 #include <libft.h>
 #include <stdarg.h>
 
-int	pf_display(const char *str, t_module *module, va_list args)
+int	pf_display(const char *str, t_module *module, va_list args, int fd)
 {
-	int	i;
-	int	j;
-	int	rab;
-	int	len;
+	int			i;
+	int			j;
+	int			rab;
+	const int	len = ft_strlen(str);
 
 	i = 0;
 	rab = 0;
 	j = 0;
-	len = ft_strlen(str);
 	while (str[i + j] && (i + j) <= len)
 	{
 		if (str[i + j] == '%')
 		{
-			rab += pf_valid_type(module, args);
+			rab += pf_valid_type(module, args, fd);
 			j++;
 			while (module->type && str[i + j] != module->type)
 				j++;
@@ -39,7 +38,7 @@ int	pf_display(const char *str, t_module *module, va_list args)
 			module = module->next;
 		}
 		else
-			i += ft_putchar(str[i + j]);
+			i += ft_putchar_fd(str[i + j], fd);
 	}
 	return (i + rab);
 }

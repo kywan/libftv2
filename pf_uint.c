@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 16:59:51 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:07:56 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:24:07 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <ft_printf.h>
 #include <stdarg.h>
 
-int		pf_uint(t_module *m, va_list args)
+int		pf_uint(t_module *m, va_list args, int fd)
 {
 	intmax_t	val;
 	int			i;
@@ -31,7 +31,7 @@ int		pf_uint(t_module *m, va_list args)
 	else
 		i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }

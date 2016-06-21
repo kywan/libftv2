@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:50:07 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 10:37:07 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 15:57:52 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,15 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 
 int					ft_putchar(char c);
 
-void				ft_putchar_fd(char c, int i);
+int					ft_putchar_fd(char c, int i);
 
 int					ft_putstr(const char *c);
 
 int					ft_putstrlen(const char *c, int len);
 
-void				ft_putstr_fd(char const *c, int fd);
+int					ft_putstrlen_fd(char const *c, int len, int fd);
+
+int					ft_putstr_fd(char const *c, int fd);
 
 void				ft_putnstr(const char *c, int n);
 

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 12:33:03 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 13:59:05 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:09:24 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,10 @@ int	pf_check_width(char *str, t_module *module)
 		i++;
 	while ((width /= 10) > 0)
 		i++;
+	if (*str == '*')
+	{
+		module->width = -2;
+		i++;
+	}
 	return (i);
 }

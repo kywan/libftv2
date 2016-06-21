@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 16:53:03 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 11:03:49 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:26:42 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <ft_printf.h>
 #include <stdarg.h>
 
-int	pf_char(t_module *m, va_list args)
+int	pf_char(t_module *m, va_list args, int fd)
 {
 	int		i;
 	char	val;
@@ -23,23 +23,23 @@ int	pf_char(t_module *m, va_list args)
 	val = (char)va_arg(args, int);
 	total = 0;
 	if (m->flag.moins)
-		total += ft_putchar(val);
+		total += ft_putchar_fd(val, fd);
 	i = m->width - 1;
 	while (i > 0)
 	{
 		if (m->flag.zero && !m->flag.moins)
-			ft_putchar('0');
+			ft_putchar_fd('0', fd);
 		else
-			ft_putchar(' ');
+			ft_putchar_fd(' ', fd);
 		i--;
 		total++;
 	}
 	if (!m->flag.moins)
-		total += ft_putchar(val);
+		total += ft_putchar_fd(val, fd);
 	return (total);
 }
 
-int	pf_schar(t_module *m, va_list args)
+int	pf_schar(t_module *m, va_list args, int fd)
 {
 	signed char	val;
 	int			i;
@@ -47,12 +47,12 @@ int	pf_schar(t_module *m, va_list args)
 	val = (signed char)va_arg(args, int);
 	i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }
 
-int	pf_uchar(t_module *m, va_list args)
+int	pf_uchar(t_module *m, va_list args, int fd)
 {
 	unsigned char	val;
 	int				i;
@@ -69,7 +69,7 @@ int	pf_uchar(t_module *m, va_list args)
 	else
 		i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 17:46:48 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 16:04:37 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:17:08 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <ft_printf.h>
 #include <wchar.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 static int	pf_winchart_11(int val, unsigned char p, unsigned int mask, int fd)
 {
@@ -86,30 +85,31 @@ static int	pf_help(int size, unsigned int val, unsigned char p, int fd)
 		return (pf_winchart_o(val, p, 4034953344, fd));
 }
 
-int			pf_winchart(t_module *m, va_list args, int f)
+int			pf_wint(t_module *m, va_list args, int fd)
 {
-	wchar_t			*val;
+	int				val;
+	int				size;
 	unsigned char	p;
 	int				total;
 	int				i;
-	int				len;
 
 	total = 0;
-	i = m->prec;
+	i = 0;
 	p = '\0';
-	if (!(val = va_arg(args, wchar_t *)))
-		return (write(f, "(null)", (m->prec < 0 || m->prec > 6) ? 6 : m->prec));
-	len = ft_strlenwchar(val);
-	val--;
+	val = (int)va_arg(args, wint_t);
+	size = ft_binsize(val);
 	if (m->flag.moins)
-		while (val++ && i-- && *val)
-			total += pf_help(ft_binsize(*val), *val, p, f);
-	i = m->width - (m->prec >= 0 && m->prec < len ? m->prec : len);
-	while (i-- > 0)
-		total += m->flag.zero && !m->flag.moins ?
-			ft_putchar_fd('0', f) : ft_putchar_fd(' ', f);
+		total += pf_help(size, val, p, fd);
+	i = m->width - 1;
+	while (i > 0)
+	{
+		if (m->flag.zero && !m->flag.moins)
+			total += ft_putchar_fd('0', fd);
+		else
+			total += ft_putchar_fd(' ', fd);
+		i--;
+	}
 	if (!m->flag.moins)
-		while (val++ && m->prec-- && *val)
-			total += pf_help(ft_binsize(*val), *val, p, f);
+		total += pf_help(size, val, p, fd);
 	return (total);
 }

@@ -6,30 +6,18 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/19 17:52:13 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:28:19 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h> //a  suprimer juste pour debug
+
 #include <stdarg.h>
 #include <ft_printf.h>
 #include <libft.h>
 #include <stdlib.h>
 
-/*static void		ft_debug(t_module *module)
+static int		pf_gestion(const char *str, va_list args, int fd)
 {
-	printf("__________________________\n\tFLAGS\n");
-	printf("'-' = %d|'+' = %d|' ' = %d|'#' = %d|'0' = %d\n",module->flag.moins,module->flag.plus,module->flag.space,module->flag.diese,module->flag.zero);
-	printf("\tTAILLE\n");
-	printf("width = %d| prec = %d\n", module->width, module->prec);
-	printf("\tMODIF|TYPE|VALUE\n");
-	printf("modif = %s|type = %c| ", module->modif, module->type);
-	if (module->type == '\x00')
-		printf("pppppppppp");
-}*/
-
-static int		pf_gestion(const char *str, va_list args)
-{
-	char	*s;
+	char		*s;
 	t_module	*start_module;
 	t_module	*work_module;
 
@@ -47,13 +35,13 @@ static int		pf_gestion(const char *str, va_list args)
 			s += pf_check_modif(s, work_module);
 			s += pf_check_flag(s, work_module);
 			work_module->type = *s;
-//			ft_debug(work_module); //a suprimer
 		}
 		else
-			return (pf_display(str, start_module, args));
+			return (pf_display(str, start_module, args, fd));
 		(*s)++;
 	}
-	return (pf_display(str, start_module, args));
+	free(s);
+	return (pf_display(str, start_module, args, fd));
 }
 
 int				ft_printf(const char *format, ...)
@@ -61,10 +49,21 @@ int				ft_printf(const char *format, ...)
 	int		total;
 	va_list	args;
 
+	total = 0;
+	va_start(args, format);
+	total = pf_gestion(format, args, 1);
+	va_end(args);
+	return (total);
+}
+
+int				ft_printf_fd(int fd, const char *format, ...)
+{
+	int		total;
+	va_list	args;
 
 	total = 0;
 	va_start(args, format);
-	total = pf_gestion(format, args);
+	total = pf_gestion(format, args, fd);
 	va_end(args);
 	return (total);
 }

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 09:57:43 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:25:53 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include <ft_printf.h>
 #include <libft.h>
 
-static int		pf_int_diese(t_module *m, __int128 val)
+static int		pf_int_diese(t_module *m, __int128 val, int fd)
 {
 	if (val != 0 || m->type == 'p')
 	{
 		if (m->type == 'x' || m->type == 'p')
-			return (ft_putstr("0x"));
+			return (ft_putstr_fd("0x", fd));
 		else if (m->type == 'X')
-			return (ft_putstr("0X"));
+			return (ft_putstr_fd("0X", fd));
 	}
 	if (m->type == 'o' || m->type == 'O')
-			return (ft_putchar('0'));
+		return (ft_putchar_fd('0', fd));
 	return (0);
 }
 
@@ -55,50 +55,54 @@ int				pf_int_init(t_module *m, __int128 val, int base, char *base_str)
 	return (i);
 }
 
-int				pf_int_moins(t_module *m, __int128 val, int i, int prec)
+int				pf_int_moins(t_module *m, __int128 val, int i, int f)
 {
-	int		total;
+	int		tot;
+	int		prec;
 
-	total = 0;
+	tot = 0;
+	prec = m->prec;
 	if (m->flag.plus || val < 0)
-		total += val >= 0 ? ft_putchar('+') : ft_putchar('-');
+		tot += val >= 0 ? ft_putchar_fd('+', f) : ft_putchar_fd('-', f);
 	else if ((m->flag.space || m->flag.diese) && val >= 0)
-		total += m->flag.space ? ft_putchar(' ') : pf_int_diese(m, val);
+		tot += m->flag.space ? ft_putchar_fd(' ', f) : pf_int_diese(m, val, f);
 	while (prec-- > 0)
-		total += ft_putchar('0');
-	total += m->prec == 0 && val == 0 ? 0 : ft_putstr(m->val_str);
+		tot += ft_putchar_fd('0', f);
+	tot += m->prec == 0 && val == 0 ? 0 : ft_putstr_fd(m->val_str, f);
 	while (i-- > 0)
-		total += ft_putchar(' ');
-	return (total);
+		tot += ft_putchar_fd(' ', f);
+	return (tot);
 }
 
-int				pf_int_nmoins(t_module *m, __int128 val, int i, int prec)
+int				pf_int_nmoins(t_module *m, __int128 v, int i, int fd)
 {
-	int		total;
+	int		tot;
+	int		prec;
 
-	total = 0;
-	if ((m->flag.plus || val < 0) && m->flag.zero)
-		total += val >= 0 ? ft_putchar('+') : ft_putchar('-');
-	else if ((m->flag.space || m->flag.diese) && val >= 0 && m->flag.zero)
-		total += m->flag.space ? ft_putchar(' ') : pf_int_diese(m, val);
+	tot = 0;
+	prec = m->prec;
+	if ((m->flag.plus || v < 0) && m->flag.zero)
+		tot += v >= 0 ? ft_putchar_fd('+', fd) : ft_putchar_fd('-', fd);
+	else if ((m->flag.space || m->flag.diese) && v >= 0 && m->flag.zero)
+		tot += m->flag.space ? ft_putchar_fd(' ', fd) : pf_int_diese(m, v, fd);
 	while (i-- > 0)
 	{
 		if (m->flag.zero && m->prec < 0)
-			total += ft_putchar('0');
+			tot += ft_putchar_fd('0', fd);
 		else
-			total += ft_putchar(' ');
+			tot += ft_putchar_fd(' ', fd);
 	}
-	if ((m->flag.plus || val < 0) && !m->flag.zero)
-		total += val >= 0 ? ft_putchar('+') : ft_putchar('-');
-	else if ((m->flag.space || m->flag.diese) && val >= 0 && !m->flag.zero)
-		total += m->flag.space ? ft_putchar(' ') : pf_int_diese(m, val);
+	if ((m->flag.plus || v < 0) && !m->flag.zero)
+		tot += v >= 0 ? ft_putchar_fd('+', fd) : ft_putchar_fd('-', fd);
+	else if ((m->flag.space || m->flag.diese) && v >= 0 && !m->flag.zero)
+		tot += m->flag.space ? ft_putchar_fd(' ', fd) : pf_int_diese(m, v, fd);
 	while (prec-- > 0)
-		total += ft_putchar('0');
-	total += m->prec == 0 && val == 0 ? 0 : ft_putstr(m->val_str);
-	return (total);
+		tot += ft_putchar_fd('0', fd);
+	tot += m->prec == 0 && v == 0 ? 0 : ft_putstr_fd(m->val_str, fd);
+	return (tot);
 }
 
-int				pf_int(t_module *m, va_list args)
+int				pf_int(t_module *m, va_list args, int fd)
 {
 	__int128	val;
 	int			i;
@@ -106,7 +110,7 @@ int				pf_int(t_module *m, va_list args)
 	val = (__int128)va_arg(args, int);
 	i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }

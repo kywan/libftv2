@@ -74,7 +74,7 @@ PRINTF=pf_printf.o \
 	   pf_string.o \
 	   pf_char.o \
 	   pf_intmaxt.o \
-	   pf_w_t.o
+	   pf_w_t.o pf_wint.o
 ################################################################################
 ##                                                                            ##
 ##                   COMPILATION RULES : DONT TOUCH: IT'S MAGIC               ##

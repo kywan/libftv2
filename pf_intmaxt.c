@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 17:30:23 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/16 17:45:06 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:25:36 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <libft.h>
 #include <ft_printf.h>
 
-int	pf_uintmaxt(t_module *m, va_list args)
+int	pf_uintmaxt(t_module *m, va_list args, int fd)
 {
 	uintmax_t	val;
 	int			i;
@@ -31,12 +31,12 @@ int	pf_uintmaxt(t_module *m, va_list args)
 	else
 		i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }
 
-int	pf_intmaxt(t_module *m, va_list args)
+int	pf_intmaxt(t_module *m, va_list args, int fd)
 {
 	intmax_t	val;
 	int			i;
@@ -44,7 +44,7 @@ int	pf_intmaxt(t_module *m, va_list args)
 	val = (intmax_t)va_arg(args, intmax_t);
 	i = pf_int_init(m, val, 10, "0123456789");
 	if (m->flag.moins)
-		return (pf_int_moins(m, val, i, m->prec));
+		return (pf_int_moins(m, val, i, fd));
 	else
-		return (pf_int_nmoins(m, val, i, m->prec));
+		return (pf_int_nmoins(m, val, i, fd));
 }
