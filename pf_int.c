@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:40:55 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 16:25:53 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 17:09:05 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static int		pf_int_diese(t_module *m, __int128 val, int fd)
 			return (ft_putstr_fd("0x", fd));
 		else if (m->type == 'X')
 			return (ft_putstr_fd("0X", fd));
+		else if (m->type == 'o' || m->type == 'O')
+			return (ft_putchar_fd('0', fd));
 	}
-	if (m->type == 'o' || m->type == 'O')
+	if ((m->type == 'o' || m->type == 'O') && (val == 0 && m->prec >= 0))
 		return (ft_putchar_fd('0', fd));
 	return (0);
 }
