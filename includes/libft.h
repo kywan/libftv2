@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:50:07 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:09:26 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 10:37:07 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # include <stdint.h>
+# include <wchar.h>
 
 typedef struct		s_list
 {
@@ -25,6 +26,8 @@ typedef struct		s_list
 void				ft_strcleanc(char **str, char c);
 
 int					ft_strsub_len(char const *str, char c);
+
+int					ft_strlenwchar(const wchar_t *c);
 
 t_list				*ft_lst_push_back(t_list **lst, t_list *item);
 
@@ -55,6 +58,8 @@ void				ft_strdel(char **as);
 char				*ft_strnew(size_t size);
 
 void				ft_striter(char *s, void (*f)(char *));
+
+int					ft_binsize(long long i);
 
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 
@@ -137,6 +142,8 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strcpy(char *dest, const char *src);
 
 char				*ft_strdup(const char *c);
+
+wchar_t				*ft_strdupwchar(const wchar_t *c);
 
 int					ft_strlcat(char *dest, char *src, size_t i);
 

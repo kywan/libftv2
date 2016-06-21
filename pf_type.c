@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 16:43:39 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 10:00:37 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	pf_cast_signed(t_module *m, va_list args)
 	else if (ft_strcmp(m->modif, "hh") == 0)
 		return (pf_schar(m, args));
 	else if (ft_strcmp(m->modif, "l") == 0 || m->type == 'D')
-		return (pf_long(m, args));
+		return (pf_ulong(m, args));
 	else if (ft_strcmp(m->modif, "ll") == 0)
 		return (pf_longlong(m, args));
 	else if (ft_strcmp(m->modif, "j") == 0)
@@ -73,12 +73,12 @@ static int	pf_other_type(t_module *module)
 
 static int	pf_cast_string(t_module *m, va_list args)
 {
-	if ((m->type == 'C' && m->modif == NULL)
+	if ((m->type == 'C' && m->modif[0] == '\0')
 			|| (m->type == 'c' && ft_strcmp(m->modif, "l") == 0))
 		return (pf_wint(m, args));
 	else if (m->type == 'c')
 		return (pf_char(m, args));
-	else if ((m->type == 'S' && m->modif == NULL)
+	else if ((m->type == 'S' && m->modif[0] == '\0')
 			|| (m->type == 's' && ft_strcmp(m->modif, "l") == 0))
 		return (pf_winchart(m, args));
 	else if (m->type == 's')

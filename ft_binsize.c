@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_prec.c                                          :+:      :+:    :+:   */
+/*   ft_binsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/17 12:53:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/19 16:48:17 by pgrassin         ###   ########.fr       */
+/*   Created: 2016/06/19 19:13:00 by pgrassin          #+#    #+#             */
+/*   Updated: 2016/06/19 19:16:20 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <ft_printf.h>
+#include <stdlib.h>
 
-int	pf_check_prec(char *str, t_module *module)
+int	ft_binsize(long long i)
 {
-	int	i;
-	int	prec;
+	char	*s;
+	int		j;
 
-	i = 0;
-	if (*str == '.')
-	{
-		i++;
-		if (ft_isdigit(*(++str)))
-		{
-			i++;
-			if ((prec = ft_atoi(str)) >= 0)
-				module->prec = prec;
-			while ((prec /= 10) > 0)
-				i++;
-		}
-		else
-			module->prec = 0;
-		return (i + pf_check_prec(str, module));
-	}
-	return (i);
+	s = ft_i128toa(i, 2, "01");
+	j = ft_strlen(s);
+	free(s);
+	return (j);
 }

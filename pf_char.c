@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 16:53:03 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:10:14 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 11:03:49 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	pf_schar(t_module *m, va_list args)
 
 int	pf_uchar(t_module *m, va_list args)
 {
-	intmax_t	val;
-	int			i;
+	unsigned char	val;
+	int				i;
 
 	m->flag.space = 0;
 	m->flag.plus = 0;
-	val = (intmax_t)va_arg(args, unsigned int);
+	val = (unsigned char)va_arg(args, int);
 	if (m->type == 'O' || m->type == 'o')
 		i = pf_int_init(m, val, 8, "01234567");
 	else if (m->type == 'x')
