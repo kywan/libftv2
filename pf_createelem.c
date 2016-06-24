@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:58:14 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/18 15:06:38 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/24 15:41:16 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_module		*pf_createelem(t_module **start)
 	new->flag.space = 0;
 	new->flag.zero = 0;
 	new->width = 0;
+	new->width_star = 0;
+	new->prec_star = 0;
 	new->prec = -1;
 	new->modif = (char *)malloc(sizeof(char) * 3);
 	new->type = '\0';

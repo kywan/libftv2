@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 18:52:21 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/24 15:50:50 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct			s_module
 	t_flag				flag;
 	int					width;
 	int					prec;
+	int					width_star;
+	int					prec_star;
 	char				*modif;
 	char				type;
 	char				*val_str;
@@ -102,4 +104,7 @@ int						pf_int_moins(t_module *m, __int128 v, int i, int fd);
 
 int						pf_int_nmoins(t_module *m, __int128 v, int i, int fd);
 
+void					pf_collect_width(t_module *m, va_list args);
+
+void					pf_collect_prec(t_module *m, va_list args);
 #endif

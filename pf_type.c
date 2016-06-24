@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 18:59:16 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/24 15:58:22 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 
 static int	pf_cast_signed(t_module *m, va_list args, int fd)
 {
-	if (m->width == -2)
-		if ((m->width = va_arg(args, int)) < 0 && (m->flag.moins = 1))
-			m->width *= -1;
-	if (m->prec == -2)
-		m->prec = va_arg(args, int);
+	pf_collect_width(m, args);
+	pf_collect_prec(m, args);
 	if (m->type == 'D')
 		return (pf_uint64(m, args, fd));
 	if (ft_strcmp(m->modif, "h") == 0)
@@ -35,22 +32,14 @@ static int	pf_cast_signed(t_module *m, va_list args, int fd)
 		return (pf_intmaxt(m, args, fd));
 	else if (ft_strcmp(m->modif, "z") == 0)
 		return (pf_sizet(m, args, fd));
-	else if (m->type == 'D')
-		return (pf_long(m, args, fd));
 	else
 		return (pf_int(m, args, fd));
 }
 
 static int	pf_cast_unsigned(t_module *m, va_list args, int fd)
 {
-	if (m->width == -2)
-		if ((m->width = va_arg(args, int)) < 0)
-		{
-			m->width *= -1;
-			m->flag.moins = 1;
-		}
-	if (m->prec == -2)
-		m->prec = va_arg(args, int);
+	pf_collect_width(m, args);
+	pf_collect_prec(m, args);
 	if (m->type == 'o' && m->modif[0] == '\0')
 		return (pf_uint32(m, args, fd));
 	if (m->type == 'O' || ft_strcmp(m->modif, "l") == 0)
@@ -73,14 +62,8 @@ static int	pf_other_type(t_module *module, va_list args, int fd)
 {
 	int	i;
 
-	if (module->width == -2)
-		if ((module->width = va_arg(args, int)) < 0)
-		{
-			module->width *= -1;
-			module->flag.moins = 1;
-		}
-	if (module->prec == -2)
-		module->prec = va_arg(args, int);
+	pf_collect_width(module, args);
+	pf_collect_prec(module, args);
 	i = module->width - 1;
 	if (module->flag.moins)
 		ft_putchar_fd(module->type, fd);
@@ -99,13 +82,8 @@ static int	pf_other_type(t_module *module, va_list args, int fd)
 
 static int	pf_cast_string(t_module *m, va_list args, int fd)
 {
-	if (m->width == -2)
-		if ((m->width = va_arg(args, int)) < 0)
-		{
-			m->width *= -1;
-			m->flag.moins = 1;
-		}
-	m->prec == -2 ? m->prec = va_arg(args, int) : 0;
+	pf_collect_width(m, args);
+	pf_collect_prec(m, args);
 	if ((m->type == 'C')
 			|| (m->type == 'c' && ft_strcmp(m->modif, "l") == 0))
 		return (pf_wint(m, args, fd));

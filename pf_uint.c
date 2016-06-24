@@ -6,13 +6,14 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 16:59:51 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 18:51:48 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/24 15:59:06 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <ft_printf.h>
 #include <stdarg.h>
+#include <stdint.h>
 
 int		pf_uint(t_module *m, va_list args, int fd)
 {
@@ -35,7 +36,6 @@ int		pf_uint(t_module *m, va_list args, int fd)
 	else
 		return (pf_int_nmoins(m, val, i, fd));
 }
-
 
 int		pf_uint32(t_module *m, va_list args, int fd)
 {
