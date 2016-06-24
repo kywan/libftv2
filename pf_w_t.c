@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 17:46:48 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 16:04:37 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/24 15:08:38 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int	pf_winchart_11(int val, unsigned char p, unsigned int mask, int fd)
+static int	pf_winchart_11(unsigned int val, unsigned char p,
+							unsigned int mask, int fd)
 {
 	unsigned char	p1;
 	unsigned char	p2;
@@ -32,7 +33,8 @@ static int	pf_winchart_11(int val, unsigned char p, unsigned int mask, int fd)
 	return (i);
 }
 
-static int	pf_winchart_16(int val, unsigned char p, unsigned int mask, int fd)
+static int	pf_winchart_16(unsigned int val, unsigned char p,
+							unsigned int mask, int fd)
 {
 	unsigned char	p3;
 	unsigned char	p2;
@@ -51,7 +53,8 @@ static int	pf_winchart_16(int val, unsigned char p, unsigned int mask, int fd)
 	return (i);
 }
 
-static int	pf_winchart_o(int val, unsigned char p, unsigned int mask, int fd)
+static int	pf_winchart_o(unsigned int val, unsigned char p,
+							unsigned int mask, int fd)
 {
 	unsigned char	p4;
 	unsigned char	p3;

@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:29:00 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 16:19:03 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 18:59:16 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@
 static int	pf_cast_signed(t_module *m, va_list args, int fd)
 {
 	if (m->width == -2)
-		if ((m->width = va_arg(args, int)) < 0)
-		{
+		if ((m->width = va_arg(args, int)) < 0 && (m->flag.moins = 1))
 			m->width *= -1;
-			m->flag.moins = 1;
-		}
 	if (m->prec == -2)
 		m->prec = va_arg(args, int);
+	if (m->type == 'D')
+		return (pf_uint64(m, args, fd));
 	if (ft_strcmp(m->modif, "h") == 0)
 		return (pf_short(m, args, fd));
 	else if (ft_strcmp(m->modif, "hh") == 0)
 		return (pf_schar(m, args, fd));
 	else if (ft_strcmp(m->modif, "l") == 0)
-		return (pf_ulong(m, args, fd));
+		return (pf_long(m, args, fd));
 	else if (ft_strcmp(m->modif, "ll") == 0)
 		return (pf_longlong(m, args, fd));
 	else if (ft_strcmp(m->modif, "j") == 0)
@@ -52,19 +51,20 @@ static int	pf_cast_unsigned(t_module *m, va_list args, int fd)
 		}
 	if (m->prec == -2)
 		m->prec = va_arg(args, int);
+	if (m->type == 'o' && m->modif[0] == '\0')
+		return (pf_uint32(m, args, fd));
+	if (m->type == 'O' || ft_strcmp(m->modif, "l") == 0)
+		return (pf_ulong(m, args, fd));
 	if (ft_strcmp(m->modif, "h") == 0)
 		return (pf_ushort(m, args, fd));
 	else if (ft_strcmp(m->modif, "hh") == 0)
 		return (pf_uchar(m, args, fd));
-	else if (ft_strcmp(m->modif, "l") == 0
-			|| (m->type == 'o' && m->modif == NULL))
-		return (pf_ulong(m, args, fd));
 	else if (ft_strcmp(m->modif, "ll") == 0)
 		return (pf_ulonglong(m, args, fd));
 	else if (ft_strcmp(m->modif, "j") == 0)
 		return (pf_uintmaxt(m, args, fd));
 	else if (ft_strcmp(m->modif, "z") == 0)
-		return (pf_sizet(m, args, fd));
+		return (pf_ulonglong(m, args, fd));
 	else
 		return (pf_uint(m, args, fd));
 }
@@ -106,12 +106,12 @@ static int	pf_cast_string(t_module *m, va_list args, int fd)
 			m->flag.moins = 1;
 		}
 	m->prec == -2 ? m->prec = va_arg(args, int) : 0;
-	if ((m->type == 'C' && m->modif[0] == '\0')
+	if ((m->type == 'C')
 			|| (m->type == 'c' && ft_strcmp(m->modif, "l") == 0))
 		return (pf_wint(m, args, fd));
 	else if (m->type == 'c')
 		return (pf_char(m, args, fd));
-	else if ((m->type == 'S' && m->modif[0] == '\0')
+	else if ((m->type == 'S')
 			|| (m->type == 's' && ft_strcmp(m->modif, "l") == 0))
 		return (pf_winchart(m, args, fd));
 	else if (m->type == 's')

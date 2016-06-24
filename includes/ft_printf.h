@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 16:36:30 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/06/21 18:52:21 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ int						pf_short(t_module *module, va_list args, int fd);
 int						pf_sizet(t_module *module, va_list args, int fd);
 
 int						pf_uint(t_module *module, va_list args, int fd);
+
+int						pf_uint32(t_module *module, va_list args, int fd);
+
+int						pf_uint64(t_module *module, va_list args, int fd);
 
 int						pf_ulong(t_module *module, va_list args, int fd);
 
