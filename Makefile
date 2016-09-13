@@ -44,7 +44,7 @@ OBJ=ft_putchar.o ft_putchar_fd.o \
 	ft_strnew.o ft_strdel.o ft_striter.o ft_striteri.o \
 	ft_strjoin.o \
 	ft_itoa.o ft_ftoa.o\
-	ft_atoi.o \
+	ft_atoi.o ft_atol.o \
 	ft_putnbr.o ft_putnbr_fd.o \
 	ft_swap_ptr.o \
 	ft_strdup.o \
@@ -55,7 +55,8 @@ OBJ=ft_putchar.o ft_putchar_fd.o \
 	ft_isprint.o \
 	ft_isspace.o \
 	ft_tolower.o \
-	ft_toupper.o
+	ft_toupper.o \
+	ft_count_words.o
 GNL=get_next_line.o
 MATH=ft_pow.o
 PRINTF=pf_printf.o \

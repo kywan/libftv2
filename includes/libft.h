@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:50:07 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 15:57:52 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/09/13 14:43:57 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct		s_list
 }					t_list;
 
 void				ft_strcleanc(char **str, char c);
+
+int					ft_count_words(const char *s, char c);
 
 int					ft_strsub_len(char const *str, char c);
 
@@ -124,6 +126,8 @@ size_t				ft_strlen(const char *c);
 int					ft_nbrlen(int i);
 
 int					ft_atoi(char *c);
+
+long				ft_atol(char *c);
 
 char				*ft_itoa(int n);
 
