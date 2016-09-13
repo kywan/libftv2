@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:54:33 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/06/21 16:28:19 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/09/13 18:00:36 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,29 @@
 #include <libft.h>
 #include <stdlib.h>
 
+static void		ft_free(t_module *mod)
+{
+	t_module	*save;
+
+	while (mod)
+	{
+		save = mod->next;
+		//free(mod.flag);
+		free(mod);
+		mod = save;
+	}
+}
+
 static int		pf_gestion(const char *str, va_list args, int fd)
 {
 	char		*s;
+	char		*save;
 	t_module	*start_module;
 	t_module	*work_module;
 
 	start_module = NULL;
 	s = ft_strdup(str);
+	save = s;
 	while (*s && s)
 	{
 		if (ft_strchr(s, '%'))
@@ -37,10 +52,13 @@ static int		pf_gestion(const char *str, va_list args, int fd)
 			work_module->type = *s;
 		}
 		else
+		{
+			//ft_free(work_module);
 			return (pf_display(str, start_module, args, fd));
+		}
 		(*s)++;
 	}
-	free(s);
+	ft_free(work_module);
 	return (pf_display(str, start_module, args, fd));
 }
 

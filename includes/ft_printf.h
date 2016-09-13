@@ -6,7 +6,7 @@
 /*   By: pgrassin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 14:52:35 by pgrassin          #+#    #+#             */
-/*   Updated: 2016/09/13 15:44:12 by pgrassin         ###   ########.fr       */
+/*   Updated: 2016/09/13 17:51:26 by pgrassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct			s_flag
 	int					space;
 	int					diese;
 	int					zero;
-
 }						t_flag;
 
 typedef struct			s_module
